@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:transjo/core/common_widgets/navigations_types.dart';
 import 'package:transjo/presentation/screens/login/login_view.dart';
-import 'package:transjo/presentation/screens/onboardingscreen/on_boarding_1.dart';
-import 'package:transjo/presentation/screens/onboardingscreen/on_boarding_2.dart';
-import 'package:transjo/presentation/screens/onboardingscreen/on_boarding_3.dart';
+import 'package:transjo/presentation/screens/onboardingscreen/widget/on_boarding_1.dart';
+import 'package:transjo/presentation/screens/onboardingscreen/widget/on_boarding_2.dart';
+import 'package:transjo/presentation/screens/onboardingscreen/widget/on_boarding_3.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});

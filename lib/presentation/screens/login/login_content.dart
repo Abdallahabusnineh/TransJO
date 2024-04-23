@@ -1,15 +1,18 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:transjo/core/common_widgets/navigations_types.dart';
-import 'package:transjo/presentation/forgot_password.dart';
-import 'package:transjo/presentation/screens/home_screen.dart';
-import 'package:transjo/presentation/screens/register_screen.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:transjo/presentation/blocs/Login/login_bloc.dart';
+import 'package:transjo/presentation/screens/forgot_password/forgotpassword_view.dart';
+import 'package:transjo/presentation/screens/home_screen/home_view.dart';
+import 'package:transjo/presentation/screens/register/register_view.dart';
 class LoginContent extends StatelessWidget {
-  const LoginContent({Key? key}) : super(key: key);
+   LoginContent({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var bloc=BlocProvider.of<LoginBloc>(context);
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -134,7 +137,7 @@ class LoginContent extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: () {
-                          navigateTo(context, ForgetPassword());
+                          navigateTo(context, ForgotPasswordView());
                         },
                         child: FadeInUp(
                           duration: Duration(milliseconds: 1000),
@@ -158,8 +161,8 @@ class LoginContent extends StatelessWidget {
                                 duration: Duration(milliseconds: 1000),
                                 child: TextButton(
                                   onPressed: () {
-                                   /* if(formKey.currentState!.validate())*/
-                                      navigateTo(context, HomeScreen());
+                                 //   if(bloc.formKey.currentState!.validate())
+                                      navigateTo(context, HomeView());
                                   },
                                   child: Text(
                                     'Login',
@@ -179,7 +182,7 @@ class LoginContent extends StatelessWidget {
                           duration: Duration(milliseconds: 1000),
                           child: TextButton(
                               onPressed: () {
-                                navigateTo(context, RegisterScreen());
+                                navigateTo(context, RegisterView());
                               },
                               child: Text(
                                 'SIGN UP',

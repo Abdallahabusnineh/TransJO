@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class ForgetPassword extends StatelessWidget {
-  const ForgetPassword({super.key});
+class HomeContent extends StatelessWidget {
+  const HomeContent({super.key});
 
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      body: Center(child: Text('forget',)),
+      body: Center(child: Text('Home')),
     );
   }
 }
