@@ -11,9 +11,9 @@ class RegisterScreen extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
             gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-          Colors.orange.shade900,
-          Colors.orange.shade800,
-          Colors.orange.shade400,
+          Colors.blue.shade900,
+          Colors.blue.shade800,
+          Colors.blue.shade400,
         ])),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -161,7 +161,7 @@ class RegisterScreen extends StatelessWidget {
                           margin: const EdgeInsets.symmetric(horizontal: 50),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(50),
-                              color: Colors.orange.shade900),
+                              color: Colors.blue.shade900),
                           child: Center(
                               child: FadeInUp(
                             duration: Duration(milliseconds: 1000),

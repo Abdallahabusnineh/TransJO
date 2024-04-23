@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:transjo/core/common_widgets/navigations_types.dart';
-import 'package:transjo/presentation/screens/login_screen.dart';
+import 'package:transjo/presentation/screens/login/login_view.dart';
+
 
 
 class ThirdOnBoardingScreen extends StatelessWidget {

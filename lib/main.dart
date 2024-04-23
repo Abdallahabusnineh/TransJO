@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:transjo/core/utils/cash_helper.dart';
 import 'package:transjo/core/utils/dio_helper.dart';
-import 'package:transjo/presentation/screens/login_screen.dart';
 import 'package:transjo/presentation/screens/onboardingscreen/onBoardingScreen.dart';
 import 'package:transjo/presentation/screens/register_screen.dart';
 

@@ -1,7 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:transjo/core/common_widgets/navigations_types.dart';
-import 'package:transjo/presentation/screens/login_screen.dart';
+import 'package:transjo/presentation/screens/login/login_view.dart';
 
 class FirstOnBoardingScreen extends StatelessWidget {
   const FirstOnBoardingScreen({super.key});
