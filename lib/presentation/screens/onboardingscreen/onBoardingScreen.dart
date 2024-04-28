@@ -49,7 +49,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       Icons.arrow_back_ios_new_outlined,
                       size: 20,
                     )),
-                SmoothPageIndicator(controller: _controller, count: 3),
+                SmoothPageIndicator(controller: _controller, count: 3,effect: WormEffect(activeDotColor: Colors.blue),),
                 onLastPage
                     ? ElevatedButton(
                         onPressed: () {

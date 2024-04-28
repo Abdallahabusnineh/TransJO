@@ -13,7 +13,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       // TODO: implement event handler
     });
   }
-  TextEditingController userName =TextEditingController();
-  TextEditingController password =TextEditingController();
+  TextEditingController userNameController =TextEditingController();
+  TextEditingController passwordController =TextEditingController();
   GlobalKey<FormState> formKey =GlobalKey<FormState>();
 }

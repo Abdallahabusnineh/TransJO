@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:transjo/core/common_widgets/navigations_types.dart';
 import 'package:transjo/presentation/screens/login/login_view.dart';
@@ -32,11 +33,14 @@ class SecondOnBoardingScreen extends StatelessWidget {
         //crossAxisAlignment: CrossAxisAlignment.center,
         //crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(10, 10, 0,0),
-            child: const Text(
-              'Find Your Way with Ease',
-              style: TextStyle(fontSize: 40,fontFamily:'Montserrat',fontWeight: FontWeight.bold ),
+          FadeInLeft(
+            duration: Duration(milliseconds: 1000),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(10, 10, 0,0),
+              child: const Text(
+                'Find Your Way with Ease',
+                style: TextStyle(fontSize: 40,fontFamily:'Montserrat',fontWeight: FontWeight.bold ),
+              ),
             ),
           ),
           Image(

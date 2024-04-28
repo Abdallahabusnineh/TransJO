@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:transjo/core/common_widgets/navigations_types.dart';
@@ -35,11 +36,14 @@ class ThirdOnBoardingScreen extends StatelessWidget {
         //crossAxisAlignment: CrossAxisAlignment.center,
         //crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 5, 0,0),
-            child: const Text(
-              'Want To Track Your Bus ?',
-              style: TextStyle(fontSize: 35,fontFamily:'Montserrat',fontWeight: FontWeight.bold ),
+          FadeInLeft(
+            duration: Duration(milliseconds: 1000),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 5, 0,0),
+              child: const Text(
+                'Want To Track Your Bus ?',
+                style: TextStyle(fontSize: 35,fontFamily:'Montserrat',fontWeight: FontWeight.bold ),
+              ),
             ),
           ),
           Lottie.asset('assets/images/Animation - 1702035910937.json'),

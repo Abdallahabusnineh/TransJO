@@ -10,7 +10,7 @@ class FirstOnBoardingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
         elevation: 0,
         actions: [
           TextButton(
@@ -27,7 +27,7 @@ class FirstOnBoardingScreen extends StatelessWidget {
           ),
         ],
       ),
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       body: Column(
         //crossAxisAlignment: CrossAxisAlignment.center,
         //crossAxisAlignment: CrossAxisAlignment.center,
@@ -38,12 +38,12 @@ class FirstOnBoardingScreen extends StatelessWidget {
               duration: Duration(milliseconds: 1000),
               child: Text(
                 'Welcome to',
-                style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold,color: Colors.white,fontFamily: 'Montserrat' ),
+                style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold,color: Colors.black,fontFamily: 'Montserrat' ),
               ),
             ),
           ),
           const SizedBox(
-            height: 30,
+            height: 50,
           ),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 10),
@@ -52,22 +52,23 @@ class FirstOnBoardingScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            height: 30,
+            height: 100
           ),
           const Text(
             'What We Provides ?',
-            style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600,color: Colors.white ),
+            style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600,color: Colors.black ),
           ),
           const Text(
             'Explore Bus Routes in Real-Time',
-            style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.grey ),
+            style: TextStyle(fontSize: 22,fontWeight: FontWeight.w400,color: Colors.grey ),
           ),
-          const SizedBox(height: 30,),
+          const SizedBox(height: 40,),
           Padding(
-            padding: const EdgeInsets.fromLTRB(55, 0, 20,0),
+            padding: const EdgeInsets.fromLTRB(35, 0, 20,0),
+
             child: RichText(text: const TextSpan(
               text: 'TransJO offers a comprehensive view of all available bus routes in your city, displayed in real-time. Easily track the location and estimated arrival times of buses on each route, empowering you to plan your journey with confidence.'
-            ,style: TextStyle(color: Colors.grey,fontSize: 20,fontWeight: FontWeight.w400),
+            ,style: TextStyle(color: Colors.grey,fontSize: 22,fontWeight: FontWeight.w400),
 
             )),
           )

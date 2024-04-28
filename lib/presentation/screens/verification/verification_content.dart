@@ -2,10 +2,9 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:transjo/core/common_widgets/navigations_types.dart';
 import 'package:transjo/presentation/screens/home_screen/home_view.dart';
-import 'package:transjo/presentation/screens/verification/verification_view.dart';
 
-class ForgotPasswordContent extends StatelessWidget {
-  const ForgotPasswordContent({super.key});
+class VerificationContent extends StatelessWidget {
+  const VerificationContent({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +30,8 @@ class ForgotPasswordContent extends StatelessWidget {
                 FadeInUp(
                     duration: Duration(milliseconds: 1300),
                     child: Text(
-                      "Forgot Password",
-                      style: TextStyle(color: Colors.white, fontSize: 32),
+                      "verification",
+                      style: TextStyle(color: Colors.white, fontSize: 40),
                     )),
                 SizedBox(
                   height: 10,
@@ -40,7 +39,7 @@ class ForgotPasswordContent extends StatelessWidget {
                 FadeInUp(
                   duration: Duration(milliseconds: 1300),
                   child: Text(
-                    'Enter your email to restore your password',
+                    'Please verify the code sent to your email',
                     style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                 ),
@@ -63,11 +62,13 @@ class ForgotPasswordContent extends StatelessWidget {
                   child: Column(
                     children: <Widget>[
                       Container(
-                        height: 270,
                         child: Image(
-                          image: AssetImage('assets/images/Forgot_password.png'),
+                          height: 200,
+                          width: 200,
+                          image: AssetImage('assets/images/verification.jpg'),
                         ),
                       ),
+
                       Container(
                         decoration: BoxDecoration(
                             color: Colors.white,
@@ -79,8 +80,7 @@ class ForgotPasswordContent extends StatelessWidget {
                                   offset: Offset(0, 10))
                             ]),
                         child: Column(
-                          children: <Widget>[
-
+                          children: [
                             Container(
                               padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
@@ -93,8 +93,33 @@ class ForgotPasswordContent extends StatelessWidget {
                                   controller: TextEditingController(),
                                   keyboardType: TextInputType.name,
                                   decoration: InputDecoration(
-                                      hintText: 'email',
-                                      prefixIcon: Icon(Icons.email),
+                                      hintText: 'Code',
+                                      prefixIcon:
+                                          Icon(Icons.verified_user_rounded),
+                                      hintStyle: TextStyle(color: Colors.grey),
+                                      border: InputBorder.none),
+                                  validator: (value) {
+                                    if (value!.isEmpty)
+                                      return 'Please enter your email';
+                                  },
+                                ),
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                  border: Border(
+                                      bottom: BorderSide(
+                                          color: Colors.grey.shade200))),
+                              child: FadeInUp(
+                                duration: Duration(milliseconds: 1000),
+                                child: TextFormField(
+                                  controller: TextEditingController(),
+                                  keyboardType: TextInputType.name,
+                                  decoration: InputDecoration(
+                                      hintText: 'Enter New Password',
+                                      prefixIcon: Icon(Icons.security),
+                                      suffixIcon: Icon(Icons.remove_red_eye),
                                       hintStyle: TextStyle(color: Colors.grey),
                                       border: InputBorder.none),
                                   validator: (value) {
@@ -122,15 +147,16 @@ class ForgotPasswordContent extends StatelessWidget {
                             child: TextButton(
                               onPressed: () {
                                 //   if(bloc.formKey.currentState!.validate())
-                                navigateTo(context, VerificationView());
+                                navigateTo(context, HomeView());
                               },
                               child: Text(
-                                'Send',
+                                'verification',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
+
                           ))),
                       SizedBox(
                         height: 10,
