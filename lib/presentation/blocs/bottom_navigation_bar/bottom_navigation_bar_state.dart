@@ -2,9 +2,9 @@ part of 'bottom_navigation_bar_bloc.dart';
 
 @immutable
 abstract class BottomNavigationBarState {}
+class InitialBottomNavigationBarState extends BottomNavigationBarState {}
 
-class BottomNavigationBarOnChange extends BottomNavigationBarState {
-final int index;
+class HomeBottomNavigationBarState extends BottomNavigationBarState {}
+class FavoriteRoutesBottomNavigationBarState extends BottomNavigationBarState {}
+class SettingBottomNavigationBarState extends BottomNavigationBarState {}
 
-  BottomNavigationBarOnChange({required this.index});
-}

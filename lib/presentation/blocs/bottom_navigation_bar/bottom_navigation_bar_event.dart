@@ -2,8 +2,7 @@ part of 'bottom_navigation_bar_bloc.dart';
 
 @immutable
 abstract class BottomNavigationBarEvent {
-  final int index;
-
-  BottomNavigationBarEvent({required this.index});
-
 }
+class FavoriteRoutesNavigationBarEvent extends BottomNavigationBarEvent{}
+class HomeNavigationBarEvent extends BottomNavigationBarEvent{}
+class SettingNavigationBarEvent extends BottomNavigationBarEvent{}

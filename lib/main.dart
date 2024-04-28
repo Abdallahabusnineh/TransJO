@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:transjo/core/utils/cash_helper.dart';
 import 'package:transjo/core/utils/dio_helper.dart';
+import 'package:transjo/presentation/screens/favorite_routes/favorite_routes_view.dart';
 import 'package:transjo/presentation/screens/home_screen/home_view.dart';
 import 'package:transjo/presentation/screens/navigation_bar/navigationbarview.dart';
 import 'package:transjo/presentation/screens/onboardingscreen/onBoardingScreen.dart';
 import 'package:transjo/presentation/screens/register/register_view.dart';
+import 'package:transjo/presentation/screens/setting/setting_view.dart';
 
 
 Future<void> main() async{

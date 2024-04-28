@@ -6,7 +6,7 @@ class FavoriteRoutesContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text('Favorite Routes '),
+      child: Center(child: Text('Favorite Routes ')),
     );
   }
 }

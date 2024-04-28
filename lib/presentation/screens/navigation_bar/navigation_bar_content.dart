@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:transjo/core/common_widgets/navigations_types.dart';
 import 'package:transjo/presentation/blocs/bottom_navigation_bar/bottom_navigation_bar_bloc.dart';
+import 'package:transjo/presentation/screens/favorite_routes/favorite_routes_view.dart';
+import 'package:transjo/presentation/screens/home_screen/home_view.dart';
+import 'package:transjo/presentation/screens/setting/setting_content.dart';
+import 'package:transjo/presentation/screens/setting/setting_view.dart';
 
 class NavigationBarContent extends StatelessWidget {
   const NavigationBarContent({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var bloc = BlocProvider.of<BottomNavigationBarBloc>(context);
 
     return BlocProvider(
       create: (context) => BottomNavigationBarBloc(),
@@ -46,6 +50,19 @@ class NavigationBarContent extends StatelessWidget {
                       text: 'Setting',
                     ),
                   ],
+                  onTabChange: (value) {
+                    if(state is HomeBottomNavigationBarState)
+                      navigateTo(context, HomeView());
+                    else if(state is FavoriteRoutesBottomNavigationBarState)
+                      navigateTo(context, FavoriteRoutesView());
+                    else if(state is SettingBottomNavigationBarState)
+                      navigateTo(context, SettingView());
+                  else
+                      navigateTo(context, HomeView());
+
+
+
+                  },
                 ),
               ));
         },

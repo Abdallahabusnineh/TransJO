@@ -7,9 +7,15 @@ part 'bottom_navigation_bar_event.dart';
 part 'bottom_navigation_bar_state.dart';
 
 class BottomNavigationBarBloc extends Bloc<BottomNavigationBarEvent, BottomNavigationBarState> {
-  BottomNavigationBarBloc() : super(BottomNavigationBarOnChange(index: 0)) {
-    on<BottomNavigationBarEvent>((event, emit) {
-emit(BottomNavigationBarOnChange(index: event.index));
+  BottomNavigationBarBloc() : super(InitialBottomNavigationBarState()) {
+    on<HomeNavigationBarEvent>((event, emit) {
+emit(HomeBottomNavigationBarState());
+    });
+    on<FavoriteRoutesNavigationBarEvent>((event, emit) {
+      emit(FavoriteRoutesBottomNavigationBarState());
+    });
+    on<SettingNavigationBarEvent>((event, emit) {
+      emit(SettingBottomNavigationBarState());
     });
   }
 }
