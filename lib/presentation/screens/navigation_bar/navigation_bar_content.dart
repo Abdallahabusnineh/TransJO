@@ -13,60 +13,45 @@ class NavigationBarContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<BottomNavigationBarBloc, BottomNavigationBarState>(
+      builder: (context, state) {
+        return Padding(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              child: GNav(
+                padding: EdgeInsets.all(16),
+                curve: Curves.bounceInOut,
+                color: Colors.black,
+                backgroundColor: Colors.white,
+                textStyle: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16),
+                activeColor: Colors.white,
 
-    return BlocProvider(
-      create: (context) => BottomNavigationBarBloc(),
-      child: BlocConsumer<BottomNavigationBarBloc, BottomNavigationBarState>(
-        listener: (context, state) {
-          // TODO: implement listener
-        },
-        builder: (context, state) {
-          return Scaffold(
-              bottomNavigationBar: Padding(
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                child: GNav(
-                  padding: EdgeInsets.all(16),
-                  curve: Curves.bounceInOut,
-                  color: Colors.black,
-                  backgroundColor: Colors.white,
-                  textStyle: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16),
-                  activeColor: Colors.white,
-
-                  // backgroundColor: Colors.blue.shade700,
-                  tabBackgroundColor: Colors.blue.shade700,
-                  gap: 10,
-                  iconSize: 25,
-                  tabs: [
-                    GButton(icon: Icons.home, text: 'Home'),
-                    GButton(
-                        icon: Icons.favorite,
-                        text: 'Favorite Routes',
-                        iconActiveColor: Colors.red.shade700),
-                    GButton(
-                      icon: Icons.settings,
-                      text: 'Setting',
-                    ),
-                  ],
-                  onTabChange: (value) {
-                    if(state is HomeBottomNavigationBarState)
-                      navigateTo(context, HomeView());
-                    else if(state is FavoriteRoutesBottomNavigationBarState)
-                      navigateTo(context, FavoriteRoutesView());
-                    else if(state is SettingBottomNavigationBarState)
-                      navigateTo(context, SettingView());
-                  else
-                      navigateTo(context, HomeView());
+                // backgroundColor: Colors.blue.shade700,
+                tabBackgroundColor: Colors.blue.shade700,
+                gap: 10,
+                iconSize: 25,
+                tabs: [
+                  GButton(icon: Icons.home, text: 'Home'),
+                  GButton(
+                      icon: Icons.favorite,
+                      text: 'Favorite Routes',
+                      iconActiveColor: Colors.red.shade700),
+                  GButton(
+                    icon: Icons.settings,
+                    text: 'Setting',
+                  ),
+                ],
+                onTabChange: (value) {
+    BottomNavigationBarBloc.getObject(context).add(BottomNavigationBarEventChange(index: value));
 
 
 
-                  },
-                ),
-              ));
-        },
-      ),
+                },
+              ),
+            );
+      },
     );
   }
 }
