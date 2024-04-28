@@ -61,6 +61,7 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   simple_animations:
   animated_text_kit: ^4.2.2
+  google_nav_bar: ^5.0.6
   flutter_svg:
   fluttertoast:
   lottie:
