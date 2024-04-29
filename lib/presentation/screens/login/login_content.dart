@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:transjo/presentation/blocs/Login/login_bloc.dart';
 import 'package:transjo/presentation/screens/forgot_password/forgotpassword_view.dart';
 import 'package:transjo/presentation/screens/home_screen/home_view.dart';
+import 'package:transjo/presentation/screens/main_screen/main_screen_view.dart';
 import 'package:transjo/presentation/screens/register/register_view.dart';
 class LoginContent extends StatelessWidget {
    LoginContent({Key? key}) : super(key: key);
@@ -92,7 +93,7 @@ class LoginContent extends StatelessWidget {
                                 child: FadeInUp(
                                   duration: Duration(milliseconds: 1000),
                                   child: TextFormField(
-                                    controller: bloc.passwordController,
+                                    controller: bloc.userNameController,
                                     keyboardType: TextInputType.name,
                                     decoration: InputDecoration(
                                         hintText: 'Username',
@@ -164,7 +165,7 @@ class LoginContent extends StatelessWidget {
                                   child: TextButton(
                                     onPressed: () {
                                      if(bloc.formKey.currentState!.validate())
-                                        navigateTo(context, HomeView());
+                                       navigateTo(context, MainScreenView());
                                     },
                                     child: Text(
                                       'Login',

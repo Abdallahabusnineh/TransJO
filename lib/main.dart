@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:transjo/core/utils/cash_helper.dart';
 import 'package:transjo/core/utils/dio_helper.dart';
 import 'package:transjo/presentation/screens/main_screen/main_screen_content.dart';
+import 'package:transjo/presentation/screens/main_screen/main_screen_view.dart';
+import 'package:transjo/presentation/screens/onboardingscreen/onBoardingScreen.dart';
+import 'package:transjo/presentation/screens/password_change_isdone/password_change_view.dart';
+import 'package:transjo/presentation/screens/setting/setting_view.dart';
 
 
 
@@ -22,7 +26,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'TrasnJo',
       theme: ThemeData(),
-      home:MainScreenContent(),
+      home:OnBoardingScreen(),
     );
   }
 }
