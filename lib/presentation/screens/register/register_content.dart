@@ -1,7 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:transjo/core/common_widgets/navigations_types.dart';
-import 'package:transjo/presentation/screens/home_screen/home_view.dart';
 import 'package:transjo/presentation/screens/main_screen/main_screen_view.dart';
 
 class RegisterContent extends StatelessWidget {

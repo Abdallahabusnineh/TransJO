@@ -5,8 +5,25 @@ class SettingContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(child: Text('Setting ')),
+    return Column(
+      children: [
+        Container(
+          height: 180,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Setting ',
+                style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Montserrat'),
+              ),
+            ],
+          ),
+        ),
+
+      ],
     );
   }
 }
