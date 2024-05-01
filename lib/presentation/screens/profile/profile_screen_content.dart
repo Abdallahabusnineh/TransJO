@@ -131,28 +131,7 @@ class ProfileScreenContent extends StatelessWidget {
                       ),
                     ),
                   ))),
-          SizedBox(height: 30,),
-          Container(
-              height: 50,
-              margin: const EdgeInsets.symmetric(horizontal: 50),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  color: Colors.blue.shade700),
-              child: Center(
-                  child: FadeInUp(
-                    duration: Duration(milliseconds: 1000),
-                    child: TextButton(
-                      onPressed: () {
-                        navigateTo(context, LoginScreen());
-                      },
-                      child: Text(
-                        'Log Out',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ))),
+
         ],
       ),
     );

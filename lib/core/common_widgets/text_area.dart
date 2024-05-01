@@ -6,7 +6,6 @@ class TextArea extends StatelessWidget {
 
     ///-----[Controller]-----
     required this.controller,
-
     ///-----[Texts]-----
     this.hintText,
     this.hintTextStyle,

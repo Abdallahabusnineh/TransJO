@@ -39,10 +39,6 @@ class NavigationBarContent extends StatelessWidget {
                       text: 'Favorite Routes',
                       iconActiveColor: Colors.red.shade700),
                   GButton(
-                    icon: Icons.person,
-                    text: 'Profile',
-                  ),
-                  GButton(
                     icon: Icons.settings,
                     text: 'Setting',
                   ),

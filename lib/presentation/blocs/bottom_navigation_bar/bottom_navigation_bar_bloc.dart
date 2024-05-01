@@ -14,7 +14,7 @@ class BottomNavigationBarBloc
     extends Bloc<BottomNavigationBarEvent, BottomNavigationBarState> {
   static  BottomNavigationBarBloc getObject(context)=>BlocProvider.of(context);
   int index = 0;
-  List<Widget> screen = [HomeView(), FavoriteRoutesView(), ProfileSceeenView(),SettingView()];
+  List<Widget> screen = [HomeView(), FavoriteRoutesView(),SettingView()];
 
   BottomNavigationBarBloc() : super(InitialBottomNavigationBarState()) {
     on<BottomNavigationBarEventChange>((event, emit) {
