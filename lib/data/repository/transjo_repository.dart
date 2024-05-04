@@ -12,10 +12,10 @@ class Repository extends BaseRepository{
   Repository(this.baseRemoteDataSource);
 
   @override
-  Future<Either<Failure, LoginSuccess>> loginApp(LoginParameter parameters) async {
+  Future<Either<Failure, String>> loginApp(LoginParameter parameters) async {
     final result=await baseRemoteDataSource.loginApp(parameters);
  try{
-   return Right(result as LoginSuccess);
+   return Right(result );
  }on ServerExceptions catch(failure){
    return Left(ServerFailure(failure.errorMessageModel.message));
  }

@@ -5,17 +5,19 @@ import 'package:transjo/core/utils/dio_helper.dart';
 import 'package:transjo/data/modules/login_success_model.dart';
 
 abstract class BaseRemoteDataSource{
-  Future<LoginSuccessModel?> loginApp(LoginParameter parameters);
+  Future<String> loginApp(LoginParameter parameters);
 }
 class RemoteDataSource extends BaseRemoteDataSource{
   @override
-  Future<LoginSuccessModel?> loginApp(LoginParameter parameters) async{
+  Future<String> loginApp(LoginParameter parameters) async{
    final result =await DioHelper.postData(url: 'login', data: {
      'username':parameters.userName,
      'password':parameters.password,
    });
+   print('carlossssssssss ${result.data}');
+   print('carlossssssssss ${result.statusCode}');
    if(result.statusCode==200)
-     return LoginSuccessModel.fromJson(result?.data);
+     return result.data;
    else
      throw ServerExceptions(errorMessageModel: ErrorMessageModel.fromJson(result.data));
   }

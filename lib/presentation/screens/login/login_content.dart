@@ -17,17 +17,7 @@ class LoginContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
    LoginBloc  bloc=BlocProvider.of<LoginBloc>(context);
-    return BlocConsumer<LoginBloc, LoginState>(
-  listener: (context, state) {
-
-    if(state is LoginSuccessState)
-      if(state.loginSuccess.status)
-        CashHelper.saveData(key: 'token', value: state.loginSuccess.data).then((value) {
-          navigateTo(context,  LoginScreen());
-        });
-
-  },
-  builder: (context, state) {
+   LoginBloc  blocListener=context.watch<LoginBloc>();
     return Form(
       key: bloc.formKey,
       child: Container(
@@ -130,7 +120,7 @@ class LoginContent extends StatelessWidget {
                                 child: FadeInUp(
                                   duration: Duration(milliseconds: 1000),
                                   child: TextFormField(
-                                    obscureText: bloc.showPassword,
+                                    obscureText: blocListener.showPassword,
                                     controller: bloc.passwordController,
                                     keyboardType: TextInputType.visiblePassword,
                                     decoration: InputDecoration(
@@ -140,7 +130,7 @@ class LoginContent extends StatelessWidget {
                                           print('123');
                                           bloc.add(ShowPasswordEvent());
 
-                                        },icon: bloc.iconData,),
+                                        },icon: blocListener.showPassword?Icon(Icons.remove_red_eye):Icon(Icons.remove_red_eye_outlined)),
                                         hintStyle: TextStyle(color: Colors.grey),
                                         border: InputBorder.none),
                                     validator: (value) {
@@ -172,35 +162,29 @@ class LoginContent extends StatelessWidget {
                         const SizedBox(
                           height: 40,
                         ),
-                        ConditionalBuilder(
-                          condition: state is !LoginLoadingState,
-                          builder: (context){
-                            return Container(
-                                height: 50,
-                                margin: const EdgeInsets.symmetric(horizontal: 50),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    color: Colors.blue.shade900),
-                                child: Center(
-                                    child: FadeInUp(
-                                      duration: Duration(milliseconds: 1000),
-                                      child: TextButton(
-                                        onPressed: () {
-                                          if(bloc.formKey.currentState!.validate())
-                                            bloc..add(LoginEventSuccess(userName: bloc.userNameController.text, password: bloc.passwordController.text));
-                                        },
-                                        child: Text(
-                                          'Login',
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    )));
-                          },
-                          fallback: (context)=>const Center(child: CircularProgressIndicator()),
-
-                        ),
+                    blocListener.state is LoginLoadingState?Center(child: CircularProgressIndicator(color: Colors.blue,)):
+                    Container(
+                        height: 50,
+                        margin: const EdgeInsets.symmetric(horizontal: 50),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            color: Colors.blue.shade900),
+                        child: Center(
+                            child: FadeInUp(
+                              duration: Duration(milliseconds: 1000),
+                              child: TextButton(
+                                onPressed: () {
+                                  if(bloc.formKey.currentState!.validate())
+                                    bloc.add(LoginStartProcessEvent(userName: bloc.userNameController.text, password: bloc.passwordController.text));
+                                },
+                                child: Text(
+                                  'Login',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ))),
                         SizedBox(
                           height: 10,
                         ),
@@ -230,7 +214,5 @@ class LoginContent extends StatelessWidget {
         ),
       ),
     );
-  },
-);
   }
 }

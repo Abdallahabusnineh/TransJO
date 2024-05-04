@@ -4,5 +4,5 @@ import 'package:transjo/core/error/failure.dart';
 import 'package:transjo/domain/entites/login_succes_entities.dart';
 
 abstract class BaseRepository{
-  Future<Either<Failure,LoginSuccess>> loginApp(LoginParameter  parameters);
+  Future<Either<Failure,String>> loginApp(LoginParameter  parameters);
 }

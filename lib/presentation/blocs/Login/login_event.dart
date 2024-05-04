@@ -2,11 +2,11 @@ part of 'login_bloc.dart';
 
 @immutable
 abstract class AbstractLoginEvent {}
-class LoginEventSuccess extends AbstractLoginEvent{
+class LoginStartProcessEvent extends AbstractLoginEvent{
   final String userName;
   final String password;
 
-  LoginEventSuccess({required this.userName, required this.password});
+  LoginStartProcessEvent({required this.userName, required this.password});
 
 }
 class ShowPasswordEvent  extends AbstractLoginEvent{
