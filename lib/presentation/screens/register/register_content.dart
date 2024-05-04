@@ -1,6 +1,8 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:transjo/core/common_widgets/navigations_types.dart';
+import 'package:transjo/presentation/blocs/register/register_bloc.dart';
 import 'package:transjo/presentation/screens/main_screen/main_screen_view.dart';
 
 class RegisterContent extends StatelessWidget {
@@ -8,15 +10,18 @@ class RegisterContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
+    RegisterBloc bloc = BlocProvider.of<RegisterBloc>(context);
+    RegisterBloc blocListener = context.watch<RegisterBloc>();
+    return Form(
+      key: bloc.formKey,
+      child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
             gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-          Colors.blue.shade900,
-          Colors.blue.shade800,
-          Colors.blue.shade400,
-        ])),
+              Colors.blue.shade900,
+              Colors.blue.shade800,
+              Colors.blue.shade400,
+            ])),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -85,12 +90,14 @@ class RegisterContent extends StatelessWidget {
                                             color: Colors.grey.shade200))),
                                 child: FadeInUp(
                                   duration: Duration(milliseconds: 1000),
-                                  child:  TextFormField(
+                                  child: TextFormField(
+                                    controller: bloc.emailController,
                                     keyboardType: TextInputType.emailAddress,
                                     decoration: InputDecoration(
                                         prefixIcon: Icon(Icons.email),
                                         hintText: 'Email',
-                                        hintStyle: TextStyle(color: Colors.grey),
+                                        hintStyle:
+                                        TextStyle(color: Colors.grey),
                                         border: InputBorder.none),
                                     validator: (value) {
                                       if (value!.isEmpty)
@@ -107,12 +114,14 @@ class RegisterContent extends StatelessWidget {
                                             color: Colors.grey.shade200))),
                                 child: FadeInUp(
                                   duration: Duration(milliseconds: 1000),
-                                  child:  TextFormField(
+                                  child: TextFormField(
+                                    controller: bloc.nameController,
                                     keyboardType: TextInputType.name,
                                     decoration: InputDecoration(
                                         hintText: 'Name',
                                         prefixIcon: Icon(Icons.person),
-                                        hintStyle: TextStyle(color: Colors.grey),
+                                        hintStyle:
+                                        TextStyle(color: Colors.grey),
                                         border: InputBorder.none),
                                     validator: (value) {
                                       if (value!.isEmpty)
@@ -129,12 +138,14 @@ class RegisterContent extends StatelessWidget {
                                             color: Colors.grey.shade200))),
                                 child: FadeInUp(
                                   duration: Duration(milliseconds: 1000),
-                                  child:  TextFormField(
+                                  child: TextFormField(
+                                    controller: bloc.userNameController,
                                     keyboardType: TextInputType.name,
                                     decoration: InputDecoration(
                                         hintText: 'Username',
                                         prefixIcon: Icon(Icons.man),
-                                        hintStyle: TextStyle(color: Colors.grey),
+                                        hintStyle:
+                                        TextStyle(color: Colors.grey),
                                         border: InputBorder.none),
                                     validator: (value) {
                                       if (value!.isEmpty)
@@ -151,13 +162,24 @@ class RegisterContent extends StatelessWidget {
                                             color: Colors.grey.shade200))),
                                 child: FadeInUp(
                                   duration: Duration(milliseconds: 1000),
-                                  child:  TextFormField(
+                                  child: TextFormField(
+                                    obscureText: blocListener.showPassword,
+                                    controller: bloc.passwordController,
                                     keyboardType: TextInputType.visiblePassword,
                                     decoration: InputDecoration(
                                         hintText: 'Password',
                                         prefixIcon: Icon(Icons.security),
-                                        suffixIcon: Icon(Icons.visibility_off_rounded),
-                                        hintStyle: TextStyle(color: Colors.grey),
+                                        suffixIcon: IconButton(
+                                            onPressed: () {
+                                              bloc.add(
+                                                  RegisterShowPasswordEvent());
+                                            },
+                                            icon: blocListener.showPassword
+                                                ? Icon(Icons.remove_red_eye)
+                                                : Icon(Icons
+                                                .remove_red_eye_outlined)),
+                                        hintStyle:
+                                        TextStyle(color: Colors.grey),
                                         border: InputBorder.none),
                                     validator: (value) {
                                       if (value!.isEmpty)
@@ -175,35 +197,41 @@ class RegisterContent extends StatelessWidget {
                         const SizedBox(
                           height: 40,
                         ),
-                        Container(
-                            height: 50,
-                            margin: const EdgeInsets.symmetric(horizontal: 50),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                color: Colors.blue.shade900),
-                            child: Center(
-                                child: FadeInUp(
-                              duration: Duration(milliseconds: 1000),
-                              child: TextButton(
-                                onPressed: () {
+blocListener.state is RegisterLoadingState?Center(child: CircularProgressIndicator(color: Colors.blue.shade700,)):
+Container(
+    height: 50,
+    margin: const EdgeInsets.symmetric(horizontal: 50),
+    decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(50),
+        color: Colors.blue.shade900),
+    child: Center(
+        child: FadeInUp(
+          duration: Duration(milliseconds: 1000),
+          child: TextButton(
+            onPressed: () {
+              if (bloc.formKey.currentState!.validate())
+                bloc.add(RegisterStartProcessEvent(
+                    name: bloc.nameController.text,
+                    userName: bloc.userNameController.text,
+                    email: bloc.emailController.text,
+                    password: bloc.passwordController.text));
+            },
+            child: Text(
+              'Register',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+        ))),
 
-                                  navigateTo(context, MainScreenView());
-                                },
-                                child: Text(
-                                  'Register',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ))),
                         SizedBox(
                           height: 10,
                         ),
                         /*  FadeInUp( duration: Duration(milliseconds: 1000),child: Text('You don\'t Have an account ?')),
-                        FadeInUp( duration: Duration(milliseconds: 1000),child: TextButton(onPressed: (){
-                          navigateTo(context,RegisterScreen());
-                        }, child: Text('SIGN UP',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20),)))*/
+                          FadeInUp( duration: Duration(milliseconds: 1000),child: TextButton(onPressed: (){
+                            navigateTo(context,RegisterScreen());
+                          }, child: Text('SIGN UP',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20),)))*/
                       ],
                     ),
                   ),

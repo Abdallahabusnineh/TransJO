@@ -127,9 +127,7 @@ class LoginContent extends StatelessWidget {
                                         hintText: 'Password',
                                         prefixIcon: Icon(Icons.security),
                                         suffixIcon:IconButton(onPressed: (){
-                                          print('123');
                                           bloc.add(ShowPasswordEvent());
-
                                         },icon: blocListener.showPassword?Icon(Icons.remove_red_eye):Icon(Icons.remove_red_eye_outlined)),
                                         hintStyle: TextStyle(color: Colors.grey),
                                         border: InputBorder.none),
@@ -162,7 +160,7 @@ class LoginContent extends StatelessWidget {
                         const SizedBox(
                           height: 40,
                         ),
-                    blocListener.state is LoginLoadingState?Center(child: CircularProgressIndicator(color: Colors.blue,)):
+                    blocListener.state is LoginLoadingState?Center(child: CircularProgressIndicator(color: Colors.blue.shade700,)):
                     Container(
                         height: 50,
                         margin: const EdgeInsets.symmetric(horizontal: 50),

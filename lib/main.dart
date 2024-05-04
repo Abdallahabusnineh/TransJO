@@ -7,6 +7,7 @@ import 'package:transjo/presentation/screens/main_screen/main_screen_content.dar
 import 'package:transjo/presentation/screens/main_screen/main_screen_view.dart';
 import 'package:transjo/presentation/screens/onboardingscreen/onBoardingScreen.dart';
 import 'package:transjo/presentation/screens/password_change_isdone/password_change_view.dart';
+import 'package:transjo/presentation/screens/register/register_view.dart';
 import 'package:transjo/presentation/screens/setting/setting_view.dart';
 
 
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'TrasnJo',
       theme: ThemeData(),
-      home:LoginScreen(),
+      home:RegisterView(),
     );
   }
 }

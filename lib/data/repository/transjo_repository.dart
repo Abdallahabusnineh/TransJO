@@ -20,4 +20,14 @@ class Repository extends BaseRepository{
    return Left(ServerFailure(failure.errorMessageModel.message));
  }
   }
+
+  @override
+  Future<Either<Failure, String>> registerApp(RegisterParameter parameters) async{
+   final result =await baseRemoteDataSource.registerApp(parameters);
+   try{
+     return Right(result );
+   }on ServerExceptions catch(failure){
+     return Left(ServerFailure(failure.errorMessageModel.message));
+   }
+  }
 }
