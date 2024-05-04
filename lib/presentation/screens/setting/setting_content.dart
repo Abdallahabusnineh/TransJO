@@ -50,6 +50,7 @@ class SettingContent extends StatelessWidget {
     ),
     ],
     ),
+    //abood alloooooo
     Divider(
     endIndent: 15,
     indent: 15,

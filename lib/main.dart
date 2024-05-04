@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:transjo/core/services/services_locater.dart';
 import 'package:transjo/core/utils/cash_helper.dart';
 import 'package:transjo/core/utils/dio_helper.dart';
+import 'package:transjo/presentation/screens/login/login_view.dart';
 import 'package:transjo/presentation/screens/main_screen/main_screen_content.dart';
 import 'package:transjo/presentation/screens/main_screen/main_screen_view.dart';
 import 'package:transjo/presentation/screens/onboardingscreen/onBoardingScreen.dart';
@@ -13,6 +15,7 @@ Future<void> main() async{
   DioHelper.init();
   WidgetsFlutterBinding.ensureInitialized();//عشان ما يعمل رن الا لما يتأكد انو كلشي معملوه initlaies
   await CashHelper.init();
+  ServicesLocater().init();
   runApp(const MyApp());
 }
 
@@ -26,7 +29,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'TrasnJo',
       theme: ThemeData(),
-      home:MainScreenView(),
+      home:LoginScreen(),
     );
   }
 }
