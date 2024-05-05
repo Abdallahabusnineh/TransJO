@@ -16,12 +16,13 @@ class LoginScreen extends StatelessWidget {
       create: (context) => sl<LoginBloc>(),
       child: BlocListener<LoginBloc, LoginState>(
         listener: (context, state) {
+          print(state);
          if(state is LoginSuccessState){
            navigateTo(context, MainScreenView());
            showToast(text: state.r, state: ToastState.SUCCESS);
 
          }
-         else
+         else if (state is LoginServerFailure)
            showToast(text: 'enter with correct value', state: ToastState.ERROR);
 
         },

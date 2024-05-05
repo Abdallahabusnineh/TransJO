@@ -16,14 +16,16 @@ class RegisterView extends StatelessWidget {
       create: (context) => sl<RegisterBloc>(),
       child: BlocConsumer<RegisterBloc, RegisterState>(
         listener: (context, state) {
+          print('Registe${state}');
           if(state is RegisterSuccessState)
             {
               navigateTo(context, MainScreenView());
               showToast(text: state.r, state: ToastState.SUCCESS);
             }
-          else
+          else if(state is RegisterServerFailure)
             showToast(text: 'enter with correct value', state: ToastState.ERROR);
-        },
+
+           },
         builder: (context, state) {
           return Scaffold(
             body: RegisterContent(),

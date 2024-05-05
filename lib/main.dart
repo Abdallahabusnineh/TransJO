@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'TrasnJo',
       theme: ThemeData(),
-      home:RegisterView(),
+      home:LoginScreen(),
     );
   }
 }

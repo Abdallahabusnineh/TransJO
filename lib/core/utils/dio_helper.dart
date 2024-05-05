@@ -6,7 +6,7 @@ class DioHelper {
   {
     dio=Dio(
       BaseOptions(
-        baseUrl: 'https://trans1ap.onrender.com/api/user/',
+        baseUrl: 'https://transjo-app-newtag.onrender.com/api/user/',
         receiveDataWhenStatusError: true,//هات الداتا حتى لو ال status ايرور
     /* headers: {
           'Content-Type': 'application/json',// ال headers الثابتة بحطها هون دايما

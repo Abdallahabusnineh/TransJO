@@ -3,7 +3,7 @@ import 'package:transjo/core/base_usecase/base_usecase.dart';
 import 'package:transjo/core/error/exceptions.dart';
 import 'package:transjo/core/error/failure.dart';
 import 'package:transjo/data/datasource/remote_datasource.dart';
-import 'package:transjo/domain/entites/login_succes_entities.dart';
+import 'package:transjo/data/modules/login_model.dart';
 import 'package:transjo/domain/repository/base_trasnsjo_repository.dart';
 
 class Repository extends BaseRepository{
@@ -12,7 +12,7 @@ class Repository extends BaseRepository{
   Repository(this.baseRemoteDataSource);
 
   @override
-  Future<Either<Failure, String>> loginApp(LoginParameter parameters) async {
+  Future<Either<Failure, LoginUserDataModel>> loginApp(LoginParameter parameters) async {
     final result=await baseRemoteDataSource.loginApp(parameters);
  try{
    return Right(result );
@@ -22,7 +22,7 @@ class Repository extends BaseRepository{
   }
 
   @override
-  Future<Either<Failure, String>> registerApp(RegisterParameter parameters) async{
+  Future<Either<Failure, LoginUserDataModel>> registerApp(RegisterParameter parameters) async{
    final result =await baseRemoteDataSource.registerApp(parameters);
    try{
      return Right(result );
