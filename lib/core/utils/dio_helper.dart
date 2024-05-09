@@ -1,11 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:transjo/core/network/apis.dart';
 
 class DioHelper {
   static Dio? dio;
 
   static init() {
     dio = Dio(BaseOptions(
-      baseUrl: 'https://transjo-app-newtag.onrender.com/api/user/',
+      baseUrl: ApisUrl.baseURL,
       receiveDataWhenStatusError: true, //هات الداتا حتى لو ال status ايرور
       /* headers: {
           'Content-Type': 'application/json',// ال headers الثابتة بحطها هون دايما

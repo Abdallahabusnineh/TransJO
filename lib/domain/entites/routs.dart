@@ -7,14 +7,13 @@ class Routs extends Equatable {
   final int id;
   final String startName;
   final String end;
-  final String startLat;
-  final String startLng;
-  final String endLat;
-  final String endlng;
+  final double startLat;
+  final double startLng;
+  final double endLat;
+  final double endlng;
   final double fare;
   final List<StopPoints> stopPoints;
   final List<Buses> buses;
-
   const Routs({
     required this.id,
     required this.startName,

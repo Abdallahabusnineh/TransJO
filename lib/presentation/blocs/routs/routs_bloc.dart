@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:transjo/domain/entites/routs.dart';
@@ -27,10 +29,13 @@ class RoutsBloc extends Bloc<RoutsEvent, RoutsState> {
     emit(RoutsGetAllLoadingState());
     final result = await getAllRoutesUsecase.call();
     result.fold((l) {
-      emit(RoutsGetAllSuccessState());
-    }, (r) {
-      routes = r;
+      print('carlos manyak ta3al aqued 3la zpi ${l.message}');
       emit(RoutsGetAllFailState());
+
+    }, (r) {
+      log('all routes${r}');
+      routes = r;
+      emit(RoutsGetAllSuccessState());
     });
   }
 

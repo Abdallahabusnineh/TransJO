@@ -1,13 +1,14 @@
 abstract class ApisUrl {
-  static const String routBaseURL = "https://transapp1.onrender.com/api/";
+  static const String baseURL = "https://tran-4rhc.onrender.com/api";
 }
 
-abstract class RoutsURLs {
+abstract class AppURLs {
   static String getAllRouts() {
-    return "${ApisUrl.routBaseURL}/routes";
+    return "${ApisUrl.baseURL}/routes";
   }
 
   static String getRoutById(int id) {
-    return "${ApisUrl.routBaseURL}/routes/$id";
+    return "${ApisUrl.baseURL}/routes/$id";
   }
+  //static String login='login';
 }

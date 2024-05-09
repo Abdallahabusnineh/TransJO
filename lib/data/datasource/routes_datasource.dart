@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:transjo/app.dart';
 import 'package:transjo/core/error/exceptions.dart';
 import 'package:transjo/core/network/apis.dart';
 import 'package:transjo/core/network/error_message_model.dart';
@@ -15,7 +16,7 @@ class RoutesDatasource extends BaseRoutesDatasource {
   @override
   Future<List<RoutsModel>> getAllRouts() async {
     try {
-      final res = await DioHelper.getdata(url: RoutsURLs.getAllRouts());
+      final res = await DioHelper.getdata(url: AppURLs.getAllRouts());
       return List<RoutsModel>.from(
           (res!.data as List).map((e) => RoutsModel.fromJson(e)));
     } on DioException catch (e) {
@@ -30,7 +31,7 @@ class RoutesDatasource extends BaseRoutesDatasource {
   @override
   Future<RoutsModel> getRouteById(int id) async {
     try {
-      final res = await DioHelper.getdata(url: RoutsURLs.getRoutById(id));
+      final res = await DioHelper.getdata(url: AppURLs.getRoutById(id));
       return RoutsModel.fromJson(res!.data['route']);
     } on DioException catch (e) {
       throw ServerExceptions(

@@ -20,7 +20,8 @@ class App extends StatelessWidget {
               ..add(GetCurrentLocation()),
           ),
           BlocProvider(
-            create: (context) => RoutsBloc(sl(),sl()),
+            create: (context) => RoutsBloc(sl(),sl())..add(RoutsGetAllEvent()),
+            lazy: false,
           ),
         ],
         child: MaterialApp(
