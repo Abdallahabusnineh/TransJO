@@ -22,7 +22,18 @@ class LoginParameter extends Equatable{
   // TODO: implement props
   List<Object?> get props => [email,password];
 
-}class RegisterParameter extends Equatable{
+}
+class ForgotPasswordParameter extends Equatable{
+  final String email;
+
+
+  ForgotPasswordParameter(this.email);
+  @override
+  // TODO: implement props
+  List<Object?> get props => [email];
+
+}
+class RegisterParameter extends Equatable{
   final String name;
   final String email;
   final String password;

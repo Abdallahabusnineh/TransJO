@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:transjo/core/utils/tools.dart';
+import 'package:transjo/presentation/screens/forgot_password/forgotpassword_view.dart';
 import 'package:transjo/presentation/screens/home/home_view.dart';
 import 'package:transjo/presentation/screens/onboardingscreen/onBoardingScreen.dart';
 
@@ -29,7 +30,7 @@ class App extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Trans Jo',
           theme: ThemeData(),
-          home: OnBoardingScreen(),
+          home: ForgotPasswordView(),
         ),
       );
     });

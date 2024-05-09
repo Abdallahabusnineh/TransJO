@@ -20,11 +20,9 @@ class LoginScreen extends StatelessWidget {
          if(state is LoginSuccessState){
            navigateTo(context, MainScreenView());
            showToast(text: state.r, state: ToastState.SUCCESS);
-
          }
          else if (state is LoginServerFailure)
            showToast(text: 'enter with correct value', state: ToastState.ERROR);
-
         },
         child: Scaffold(
             body: LoginContent()
