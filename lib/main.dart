@@ -1,35 +1,20 @@
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:transjo/core/services/services_locater.dart';
 import 'package:transjo/core/utils/cash_helper.dart';
 import 'package:transjo/core/utils/dio_helper.dart';
-import 'package:transjo/presentation/screens/login/login_view.dart';
-import 'package:transjo/presentation/screens/main_screen/main_screen_content.dart';
-import 'package:transjo/presentation/screens/main_screen/main_screen_view.dart';
-import 'package:transjo/presentation/screens/onboardingscreen/onBoardingScreen.dart';
-import 'package:transjo/presentation/screens/password_change_isdone/password_change_view.dart';
-import 'package:transjo/presentation/screens/register/register_view.dart';
-import 'package:transjo/presentation/screens/setting/setting_view.dart';
 
+import 'app.dart';
+import 'core/utils/bloc_observer.dart';
 
-
-Future<void> main() async{
+Future<void> main() async {
   DioHelper.init();
-  WidgetsFlutterBinding.ensureInitialized();//عشان ما يعمل رن الا لما يتأكد انو كلشي معملوه initlaies
+  WidgetsFlutterBinding
+      .ensureInitialized(); //عشان ما يعمل رن الا لما يتأكد انو كلشي معملوه initlaies
   await CashHelper.init();
+  Bloc.observer = MyBlocObserver();
   ServicesLocater().init();
-  runApp(const MyApp());
+  runApp(const App());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'TrasnJo',
-      theme: ThemeData(),
-      home:OnBoardingScreen(),
-    );
-  }
-}
+
