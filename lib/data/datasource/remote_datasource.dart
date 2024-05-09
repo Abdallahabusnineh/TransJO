@@ -1,5 +1,6 @@
 import 'package:transjo/core/base_usecase/base_usecase.dart';
 import 'package:transjo/core/error/exceptions.dart';
+import 'package:transjo/core/network/apis.dart';
 import 'package:transjo/core/network/error_message_model.dart';
 import 'package:transjo/core/utils/dio_helper.dart';
 import 'package:transjo/data/modules/login_model.dart';
@@ -11,8 +12,8 @@ abstract class BaseRemoteDataSource{
 class RemoteDataSource extends BaseRemoteDataSource{
   @override
   Future<LoginUserDataModel> loginApp(LoginParameter parameters) async{
-   final result =await DioHelper.postData(url: 'login', data: {
-     'username':parameters.userName,
+   final result =await DioHelper.postData(url: AppURLs.userLogin, data: {
+     'email':parameters.email,
      'password':parameters.password,
    });
    print('carlossssssssss ${result.data}');
@@ -26,8 +27,7 @@ class RemoteDataSource extends BaseRemoteDataSource{
 
   @override
   Future<LoginUserDataModel> registerApp(RegisterParameter parameters) async{
-   final result=await DioHelper.postData(url: 'register', data: {
-     'username':parameters.userName,
+   final result=await DioHelper.postData(url: AppURLs.userRegister, data: {
      'password':parameters.password,
      'name':parameters.name,
      'email':parameters.email,

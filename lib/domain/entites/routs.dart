@@ -1,8 +1,6 @@
 import 'package:equatable/equatable.dart';
-
 import 'buses.dart';
 import 'stop_points.dart';
-
 class Routs extends Equatable {
   final int id;
   final String startName;

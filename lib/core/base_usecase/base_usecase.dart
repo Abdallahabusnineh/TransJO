@@ -14,25 +14,24 @@ class NoParameters extends Equatable{
 }
 
 class LoginParameter extends Equatable{
-  final String userName;
+  final String email;
   final String password;
 
-  LoginParameter(this.userName,this.password);
+  LoginParameter(this.email,this.password);
   @override
   // TODO: implement props
-  List<Object?> get props => [userName,password];
+  List<Object?> get props => [email,password];
 
 }class RegisterParameter extends Equatable{
-  final String userName;
   final String name;
   final String email;
   final String password;
 
-  RegisterParameter({required this.userName, required this.name, required this.email, required this.password});
+  RegisterParameter({ required this.name, required this.email, required this.password});
 
 
   @override
   // TODO: implement props
-  List<Object?> get props => [userName,password,name,email];
+  List<Object?> get props => [password,name,email];
 
 }

@@ -17,7 +17,7 @@ class LoginBloc extends Bloc<AbstractLoginEvent, LoginState> {
 
   bool showPassword = true;
 
-  TextEditingController userNameController = TextEditingController();
+  TextEditingController emailNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   LoginUseCase loginUseCase;
@@ -27,7 +27,7 @@ class LoginBloc extends Bloc<AbstractLoginEvent, LoginState> {
     emit(LoginLoadingState());
     try{
       final result =
-      await loginUseCase.call(LoginParameter(event.userName, event.password));
+      await loginUseCase.call(LoginParameter(event.email, event.password));
       result.fold((l) {
         print('carlossss ${l.message}');
         emit(LoginServerFailure(l.message));

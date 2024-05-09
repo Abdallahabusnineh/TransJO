@@ -130,30 +130,7 @@ class RegisterContent extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              Container(
-                                padding: const EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                    border: Border(
-                                        bottom: BorderSide(
-                                            color: Colors.grey.shade200))),
-                                child: FadeInUp(
-                                  duration: Duration(milliseconds: 1000),
-                                  child: TextFormField(
-                                    controller: bloc.userNameController,
-                                    keyboardType: TextInputType.name,
-                                    decoration: InputDecoration(
-                                        hintText: 'Username',
-                                        prefixIcon: Icon(Icons.man),
-                                        hintStyle:
-                                        TextStyle(color: Colors.grey),
-                                        border: InputBorder.none),
-                                    validator: (value) {
-                                      if (value!.isEmpty)
-                                        return 'Please Enter Username';
-                                    },
-                                  ),
-                                ),
-                              ),
+
                               Container(
                                 padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(
@@ -212,7 +189,6 @@ Container(
               if (bloc.formKey.currentState!.validate())
                 bloc.add(RegisterStartProcessEvent(
                     name: bloc.nameController.text,
-                    userName: bloc.userNameController.text,
                     email: bloc.emailController.text,
                     password: bloc.passwordController.text));
             },

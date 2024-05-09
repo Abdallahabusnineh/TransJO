@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:transjo/core/utils/tools.dart';
 import 'package:transjo/presentation/screens/home/home_view.dart';
+import 'package:transjo/presentation/screens/onboardingscreen/onBoardingScreen.dart';
 
 import 'presentation/blocs/maps/maps_bloc.dart';
 import 'presentation/blocs/routs/routs_bloc.dart';
@@ -28,7 +29,7 @@ class App extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Trans Jo',
           theme: ThemeData(),
-          home: HomeView(),
+          home: OnBoardingScreen(),
         ),
       );
     });

@@ -12,7 +12,6 @@ part 'register_state.dart';
 class RegisterBloc extends Bloc<AbstractRegisterEvent, RegisterState> {
   bool showPassword = true;
 
-  TextEditingController userNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -29,7 +28,6 @@ class RegisterBloc extends Bloc<AbstractRegisterEvent, RegisterState> {
     emit(RegisterLoadingState());
    try{
      final result = await registerUseCase.call(RegisterParameter(
-         userName: event.userName,
          name: event.name,
          email: event.email,
          password: event.password));

@@ -97,16 +97,16 @@ class LoginContent extends StatelessWidget {
                                 child: FadeInUp(
                                   duration: Duration(milliseconds: 1000),
                                   child: TextFormField(
-                                    controller: bloc.userNameController,
+                                    controller: bloc.emailNameController,
                                     keyboardType: TextInputType.name,
                                     decoration: InputDecoration(
-                                        hintText: 'Username',
+                                        hintText: 'email',
                                         prefixIcon: Icon(Icons.person),
                                         hintStyle: TextStyle(color: Colors.grey),
                                         border: InputBorder.none),
                                     validator: (value ) {
                                       if (value!.isEmpty)
-                                        return 'Please enter user name ';
+                                        return 'Please enter email ';
                                     },
                                   ),
                                 ),
@@ -173,7 +173,7 @@ class LoginContent extends StatelessWidget {
                               child: TextButton(
                                 onPressed: () {
                                   if(bloc.formKey.currentState!.validate())
-                                    bloc.add(LoginStartProcessEvent(userName: bloc.userNameController.text, password: bloc.passwordController.text));
+                                    bloc.add(LoginStartProcessEvent(email: bloc.emailNameController.text, password: bloc.passwordController.text));
                                 },
                                 child: Text(
                                   'Login',
