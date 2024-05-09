@@ -76,7 +76,7 @@ class RegisterContent extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20),
                               boxShadow: [
                                 const BoxShadow(
-                                    color: Color.fromRGBO(225, 95, 27, 0.3),
+                                    color: Colors.blueGrey,
                                     blurRadius: 20,
                                     offset: Offset(0, 10))
                               ]),
