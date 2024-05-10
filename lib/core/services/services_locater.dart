@@ -9,6 +9,7 @@ import 'package:transjo/domain/repository/base_trasnsjo_repository.dart';
 import 'package:transjo/domain/repository/forgot_password_repo.dart';
 import 'package:transjo/domain/repository/rout_repo.dart';
 import 'package:transjo/domain/usecases/forgot_password/forgot_password_usecase.dart';
+import 'package:transjo/domain/usecases/forgot_password/verification_usecase.dart';
 import 'package:transjo/domain/usecases/login_usecase.dart';
 import 'package:transjo/domain/usecases/register_usecase.dart';
 import 'package:transjo/domain/usecases/routes/get_all_routes_usecase.dart';
@@ -16,6 +17,7 @@ import 'package:transjo/domain/usecases/routes/get_routes_by_id_usecase.dart';
 import 'package:transjo/presentation/blocs/Login/login_bloc.dart';
 import 'package:transjo/presentation/blocs/forgotpassword/forgot_password_bloc.dart';
 import 'package:transjo/presentation/blocs/register/register_bloc.dart';
+import 'package:transjo/presentation/blocs/verification_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -45,7 +47,9 @@ class ServicesLocater {
 
     //forgot password
     sl.registerFactory(() => ForgotPasswordBloc(sl()));
+    sl.registerFactory(() => VerificationBloc(sl()));
     sl.registerLazySingleton(() => SendCodeUseCase(sl()));
+    sl.registerLazySingleton(() => VerificationUseCase(sl()));
     sl.registerLazySingleton<BaseForgotPasswordRepository>(() => ForgotPasswordRepository(
         sl()));
     sl.registerLazySingleton<BaseForgotPasswordDataSource>(() => ForgotPasswordDataSource());

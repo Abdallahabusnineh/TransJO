@@ -13,5 +13,6 @@ abstract class AppURLs {
   static String userLogin='/user/login';
   static String userRegister='/user/register';
   static String forgotPassword='/user/reset-password';
+  static String verificationCode='/user/change-password';
 
 }

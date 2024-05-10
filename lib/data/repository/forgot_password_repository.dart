@@ -19,4 +19,14 @@ class ForgotPasswordRepository extends BaseForgotPasswordRepository{
     }
   }
 
+  @override
+  Future<Either<Failure, String>> verificationCode(VerificationParameter parameters) async {
+    final result=await baseForgotPasswordDataSource.verificationCode(parameters);
+    try{
+      return Right(result.toString());
+    }on ServerExceptions catch(failure){
+      return Left(ServerFailure(failure.errorMessageModel.message));
+    }
+  }
+
 }

@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:transjo/core/base_usecase/base_usecase.dart';
 import 'package:transjo/domain/usecases/forgot_password/forgot_password_usecase.dart';
+import 'package:transjo/presentation/blocs/forgotpassword/forgot_password_bloc.dart';
 
 part 'forgot_password_event.dart';
 
@@ -15,7 +16,6 @@ class ForgotPasswordBloc
       : super(ForgotPasswordInitialState()) {
     on<SendCodeProcessEvent>(_onSendCodeProcessEvent);
   }
-
   TextEditingController emailNameController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   SendCodeUseCase sendCodeUseCase;
@@ -27,14 +27,14 @@ class ForgotPasswordBloc
       final result =
           await sendCodeUseCase.call(ForgotPasswordParameter(event.email));
       result.fold((l) {
-        print('carlossss ${l.message}');
+        print('send code is done ${l.message}');
         emit(ForgotPasswordServerFailureState(l.message));
       }, (r) {
         emit(ForgotPasswordSuccessState("Login Successfully"));
       });
     } catch (e) {
       print(e.toString());
-      emit(ForgotPasswordServerFailureState(e.toString()));
+      emit(ForgotPasswordErrorState(e.toString()));
     }
   }
 }

@@ -24,7 +24,6 @@ class RemoteDataSource extends BaseRemoteDataSource{
      throw ServerExceptions(errorMessageModel: ErrorMessageModel.fromJson(result.data));
    }
   }
-
   @override
   Future<LoginUserDataModel> registerApp(RegisterParameter parameters) async{
    final result=await DioHelper.postData(url: AppURLs.userRegister, data: {

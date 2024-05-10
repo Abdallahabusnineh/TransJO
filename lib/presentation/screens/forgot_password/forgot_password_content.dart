@@ -8,9 +8,10 @@ import 'package:transjo/presentation/screens/verification/verification_view.dart
 
 class ForgotPasswordContent extends StatelessWidget {
   const ForgotPasswordContent({super.key});
-
+static String ?email;
   @override
   Widget build(BuildContext context) {
+
     ForgotPasswordBloc  bloc=BlocProvider.of<ForgotPasswordBloc>(context);
     ForgotPasswordBloc  blocListener=context.watch<ForgotPasswordBloc>();
     return Form(
@@ -128,9 +129,10 @@ class ForgotPasswordContent extends StatelessWidget {
                               duration: Duration(milliseconds: 1000),
                               child: TextButton(
                                 onPressed: () {
-                                     if(bloc.formKey.currentState!.validate())
+                                     if(bloc.formKey.currentState!.validate()){
                                   bloc.add(SendCodeProcessEvent(email: bloc.emailNameController.text));
-                                },
+                                email=bloc.emailNameController.text;
+                                     }},
                                 child: Text(
                                   'Send',
                                   style: TextStyle(
