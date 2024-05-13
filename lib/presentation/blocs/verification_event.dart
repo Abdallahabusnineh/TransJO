@@ -7,3 +7,6 @@ class VerificationStartProcessEvent extends AbstractVerificationEvent {
   final String code;
   VerificationStartProcessEvent({required this.newPassword,required this.code});
 }
+class VerificationShowPasswordEvent  extends AbstractVerificationEvent{
+
+}

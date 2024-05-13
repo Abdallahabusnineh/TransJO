@@ -18,3 +18,4 @@ class VerificationErrorState extends VerificationState {
   final String error;
   VerificationErrorState(this.error);
 }
+class VerificationIconDataChanged extends VerificationState{}

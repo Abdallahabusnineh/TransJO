@@ -121,12 +121,17 @@ class VerificationContent extends StatelessWidget {
                                 child: FadeInUp(
                                   duration: Duration(milliseconds: 1000),
                                   child: TextFormField(
+                                    obscureText: blocListener.showPassword,
                                     controller:bloc.newPasswordNameController,
                                     keyboardType: TextInputType.name,
                                     decoration: InputDecoration(
+
                                         hintText: 'Enter New Password',
+
                                         prefixIcon: Icon(Icons.security),
-                                        suffixIcon: Icon(Icons.remove_red_eye),
+                                        suffixIcon:IconButton(onPressed: (){
+                                          bloc.add(VerificationShowPasswordEvent());
+                                        },icon: blocListener.showPassword?Icon(Icons.visibility_off_rounded):Icon(Icons.remove_red_eye_outlined),),
                                         hintStyle: TextStyle(color: Colors.grey),
                                         border: InputBorder.none),
                                     validator: (value) {

@@ -30,9 +30,10 @@ class App extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Trans Jo',
           theme: ThemeData(),
-          home: ForgotPasswordView(),
+          home: OnBoardingScreen(),
         ),
       );
     });
   }
 }
+
