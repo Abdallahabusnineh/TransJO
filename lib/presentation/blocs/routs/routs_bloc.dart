@@ -26,6 +26,7 @@ class RoutsBloc extends Bloc<RoutsEvent, RoutsState> {
     RoutsGetAllEvent event,
     Emitter emit,
   ) async {
+    print('the ddddddd ');
     emit(RoutsGetAllLoadingState());
     final result = await getAllRoutesUsecase.call();
     result.fold((l) {

@@ -17,6 +17,7 @@ class RoutesDatasource extends BaseRoutesDatasource {
   Future<List<RoutsModel>> getAllRouts() async {
     try {
       final res = await DioHelper.getdata(url: AppURLs.getAllRouts());
+      print('i9sweeeeeeeeeee here dkdk ${res!.realUri}');
       return List<RoutsModel>.from(
           (res!.data as List).map((e) => RoutsModel.fromJson(e)));
     } on DioException catch (e) {

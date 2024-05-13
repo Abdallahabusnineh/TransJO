@@ -1,48 +1,20 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:transjo/core/utils/tools.dart';
 import 'package:transjo/presentation/blocs/maps/maps_bloc.dart';
 
-class MapBuilder extends StatefulWidget {
-  MapBuilder({super.key, required this.onMapCreated});
-
-  void Function(GoogleMapController)? onMapCreated;
+class RouteDetailsMap extends StatefulWidget {
+  const RouteDetailsMap({super.key});
 
   @override
-  State<MapBuilder> createState() => _MapBuilderState();
+  State<RouteDetailsMap> createState() => _RouteDetailsMapState();
 }
 
-class _MapBuilderState extends State<MapBuilder> {
-  List<LatLng> polylineCoordinates = [];
-
-  ///TODO [Carlos]:::: handel it in weekend
-  // void getPolyPoints() async {
-  //   PolylinePoints polylinePoints = PolylinePoints();
-  //
-  //   PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-  //     "AIzaSyD8TtKOU4l9Ys5hhclOg9w70pO1uWzi5BU",
-  //     const PointLatLng(31.9570, 35.9549),
-  //     const PointLatLng(31.9635, 35.9085),
-  //   );
-  //   print('the result is ${result}');
-  //   if (result.points.isNotEmpty) {
-  //     result.points.forEach(
-  //       (element) {
-  //         polylineCoordinates.add(LatLng(element.latitude, element.longitude));
-  //       },
-  //     );
-  //     setState(
-  //       () {},
-  //     );
-  //   }
-  // }
-
-  @override
-  void initState() {
-    // getPolyPoints();
-    super.initState();
-  }
-
+class _RouteDetailsMapState extends State<RouteDetailsMap> {
+  final Completer<GoogleMapController> _controller =
+  Completer<GoogleMapController>();
   @override
   Widget build(BuildContext context) {
     MapsBloc bloc = context.read<MapsBloc>();
@@ -56,11 +28,14 @@ class _MapBuilderState extends State<MapBuilder> {
           );
         }
         return GoogleMap(
-          onMapCreated: widget.onMapCreated,
+          onMapCreated: (GoogleMapController controller) {
+            _controller.complete(controller);
+            bloc.setterNewGoogleController = controller;
+          },
           polylines: {
-            Polyline(
+            const Polyline(
                 polylineId: PolylineId("Firstone"),
-                points: polylineCoordinates,
+                // points: polylineCoordinates,
                 color: Colors.red,
                 width: 10)
           },

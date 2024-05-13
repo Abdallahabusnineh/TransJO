@@ -2,15 +2,16 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
 import 'package:transjo/core/utils/tools.dart';
 import 'package:transjo/presentation/blocs/maps/maps_bloc.dart';
+import 'package:transjo/presentation/blocs/routs/routs_bloc.dart';
 import 'package:transjo/presentation/screens/maps/map_builder.dart';
+import 'package:transjo/presentation/screens/routes_details/routes_details_view.dart';
 
 import 'widgets/search_box.dart';
 
 class HomeContent extends StatefulWidget {
-  const HomeContent({Key? key}) : super(key: key);
+  const HomeContent({super.key});
 
   @override
   State<HomeContent> createState() => _HomeContentState();
@@ -23,6 +24,8 @@ class _HomeContentState extends State<HomeContent> {
   @override
   Widget build(BuildContext context) {
     var bloc = context.read<MapsBloc>();
+    var routeBloc = context.read<RoutsBloc>();
+    var routeBlocListener = context.watch<RoutsBloc>();
     return Stack(
       children: [
         Container(
@@ -72,61 +75,61 @@ class _HomeContentState extends State<HomeContent> {
                     ],
                   ),
                   const VerticalSpacing(1),
-                  // BlocBuilder<RoutsBloc, RoutsState>(
-                  //   builder: (context, state) {
-                  //     RoutsBloc bloc = sl<RoutsBloc>();
-                  //     return ListView.separated(
-                  //         shrinkWrap: true,
-                  //         physics: const NeverScrollableScrollPhysics(),
-                  //         padding: EdgeInsets.only(bottom: 1.h),
-                  //         itemBuilder: (context, index) {
-                  //           return Container(
-                  //             padding: EdgeInsets.symmetric(
-                  //                 horizontal: 2.w, vertical: 1.h),
-                  //             decoration: BoxDecoration(
-                  //               color: AppColors.myGrey,
-                  //               borderRadius: BorderRadius.circular(20),
-                  //             ),
-                  //             child: Row(
-                  //               children: [
-                  //                 InkWell(
-                  //                   onTap: () {},
-                  //                   child: Container(
-                  //                     padding: EdgeInsets.symmetric(
-                  //                         horizontal: 2.w, vertical: 1.h),
-                  //                     decoration: BoxDecoration(
-                  //                       borderRadius: BorderRadius.circular(10),
-                  //                       color: Colors.red,
-                  //                     ),
-                  //                     child: TextWidget(
-                  //                       text: bloc.routs[index].routNumber,
-                  //                       textColor: Colors.white,
-                  //                       fontSize: 10.sp,
-                  //                     ),
-                  //                   ),
-                  //                 ),
-                  //                 const HorizontalSpacing(2),
-                  //                 Column(
-                  //                   mainAxisAlignment: MainAxisAlignment.center,
-                  //                   crossAxisAlignment:
-                  //                       CrossAxisAlignment.start,
-                  //                   children: [
-                  //                     TextWidget(
-                  //                       text:
-                  //                           "${bloc.routs[index].startPointName} - ${bloc.routs[index].endPointName}",
-                  //                       fontWeight: FontWeight.w600,
-                  //                     ),
-                  //                   ],
-                  //                 )
-                  //               ],
-                  //             ),
-                  //           );
-                  //         },
-                  //         separatorBuilder: (context, index) =>
-                  //             const VerticalSpacing(1.5),
-                  //         itemCount: bloc.routs.length);
-                  //   },
-                  // )
+                  ListView.separated(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      padding: EdgeInsets.only(bottom: 1.h),
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () {
+                            navigateTo(context, RoutesDetailsView(route: routeBloc.routes[index],));
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 2.w, vertical: 1.h),
+                            decoration: BoxDecoration(
+                              color: AppColors.myGrey,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Row(
+                              children: [
+                                InkWell(
+                                  onTap: () {},
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 2.w, vertical: 1.h),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.red,
+                                    ),
+                                    child: TextWidget(
+                                      text:
+                                          routeBloc.routes[index].id.toString(),
+                                      textColor: Colors.white,
+                                      fontSize: 10.sp,
+                                    ),
+                                  ),
+                                ),
+                                const HorizontalSpacing(2),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    TextWidget(
+                                      text:
+                                          "${routeBloc.routes[index].startName} - ${routeBloc.routes[index].end}",
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                      separatorBuilder: (context, index) =>
+                          const VerticalSpacing(1.5),
+                      itemCount: routeBlocListener.routes.length)
                 ],
               ),
             ),
