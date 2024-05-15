@@ -18,6 +18,7 @@ class FeedbackView extends StatelessWidget {
         listener: (context, state) {
       if(state is FeedBackSuccessState)
         navigateTo(context, FeedbackIsDone());
+
       showToast(text: 'feed back is done, we will contact with you', state: ToastState.SUCCESS);
         },
         child: Scaffold(

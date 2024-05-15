@@ -2,6 +2,7 @@ import 'package:transjo/core/base_usecase/base_usecase.dart';
 import 'package:transjo/core/error/exceptions.dart';
 import 'package:transjo/core/network/apis.dart';
 import 'package:transjo/core/network/error_message_model.dart';
+import 'package:transjo/core/utils/app_assets.dart';
 import 'package:transjo/core/utils/dio_helper.dart';
 import 'package:transjo/data/modules/login_model.dart';
 
@@ -16,6 +17,7 @@ class RemoteDataSource extends BaseRemoteDataSource{
      'email':parameters.email,
      'password':parameters.password,
    });
+
    print('carlossssssssss ${result.data}');
    print('carlossssssssss ${result.statusCode}');
    if(result.statusCode==200) {

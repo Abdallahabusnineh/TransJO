@@ -35,12 +35,13 @@ class DioHelper {
     dynamic query,
     required Map<String, dynamic> data,
     String lang = 'en',
-    String? token,
+    String? basicAuth,
+   // String? token,
   }) async {
     dio?.options.headers = {
       'Content-Type': 'application/json',
       'lang': lang,
-      'Authorization': token ?? ''
+      'Authorization': basicAuth ?? ''
     };
     return dio!.post(url, queryParameters: query, data: data);
   }

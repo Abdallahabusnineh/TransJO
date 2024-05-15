@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:transjo/core/common_widgets/navigations_types.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:transjo/core/utils/app_assets.dart';
 import 'package:transjo/core/utils/cash_helper.dart';
 import 'package:transjo/presentation/blocs/Login/login_bloc.dart';
 import 'package:transjo/presentation/screens/forgot_password/forgot_password_content.dart';
@@ -175,7 +176,10 @@ class LoginContent extends StatelessWidget {
                                 onPressed: () {
                                   if(bloc.formKey.currentState!.validate())
                                     bloc.add(LoginStartProcessEvent(email: bloc.emailNameController.text, password: bloc.passwordController.text));
-                                ForgotPasswordContent.email=bloc.emailNameController.text;
+                                AppAssets.emailAuth=bloc.emailNameController.text;
+                                AppAssets.passwordAuth=bloc.passwordController.text;
+                                print('email: ${AppAssets.emailAuth}');
+                                print('password: ${AppAssets.passwordAuth}');
                                   },
                                 child: Text(
                                   'Login',
