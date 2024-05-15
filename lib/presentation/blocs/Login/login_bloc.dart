@@ -14,9 +14,7 @@ class LoginBloc extends Bloc<AbstractLoginEvent, LoginState> {
     on<LoginStartProcessEvent>(_onLoginStartProcessEvent);
     on<ShowPasswordEvent>(_onShowPasswordEvent);
   }
-
   bool showPassword = true;
-
   TextEditingController emailNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();

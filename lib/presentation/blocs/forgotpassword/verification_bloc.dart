@@ -4,12 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 import 'package:transjo/core/base_usecase/base_usecase.dart';
 import 'package:transjo/domain/usecases/forgot_password/verification_usecase.dart';
-
-
+import 'package:transjo/presentation/blocs/forgotpassword/verification_state.dart';
 part 'verification_event.dart';
-part 'verification_state.dart';
 
-class VerificationBloc extends Bloc<AbstractVerificationEvent, VerificationState> {
+
+class VerificationBloc extends Bloc<AbstractVerificationEvent,VerificationState> {
   VerificationBloc(this.verificationUseCase) : super(VerificationInitialState()) {
     on<VerificationStartProcessEvent>(_onVerificationStartProcessEvent);
     on<VerificationShowPasswordEvent>(_onVerificationShowPasswordEvent);

@@ -33,6 +33,16 @@ class ForgotPasswordParameter extends Equatable{
   List<Object?> get props => [email];
 
 }
+class FeedBackParameter extends Equatable{
+  final String text;
+
+
+  FeedBackParameter(this.text);
+  @override
+  // TODO: implement props
+  List<Object?> get props => [text];
+
+}
 class VerificationParameter extends Equatable{
   final String code;
   final String newPassword;
