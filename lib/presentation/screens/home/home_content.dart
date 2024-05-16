@@ -29,9 +29,9 @@ class _HomeContentState extends State<HomeContent> {
     return Stack(
       children: [
         Container(
-          height: 45.h,
+          height: 50.h,
           width: double.infinity,
-          margin: EdgeInsets.only(top: 15.h),
+          // margin: EdgeInsets.only(top: 15.h),
           decoration: const BoxDecoration(
             color: AppColors.myGrey,
           ),
@@ -43,11 +43,11 @@ class _HomeContentState extends State<HomeContent> {
           ),
         ),
         Column(children: [
-          const VerticalSpacing(4),
-          const SearchBox(),
+          // const VerticalSpacing(4),
+          // const SearchBox(),
           const Spacer(),
           Container(
-            height: 40.h,
+            height: 50.h,
             width: 100.w,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30), color: Colors.white),
@@ -82,7 +82,11 @@ class _HomeContentState extends State<HomeContent> {
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
-                            navigateTo(context, RoutesDetailsView(route: routeBloc.routes[index],));
+                            navigateTo(
+                                context,
+                                RoutesDetailsView(
+                                  route: routeBloc.routes[index],
+                                ));
                           },
                           child: Container(
                             padding: EdgeInsets.symmetric(
@@ -93,34 +97,33 @@ class _HomeContentState extends State<HomeContent> {
                             ),
                             child: Row(
                               children: [
-                                InkWell(
-                                  onTap: () {},
-                                  child: Container(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 2.w, vertical: 1.h),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Colors.red,
-                                    ),
-                                    child: TextWidget(
-                                      text:
-                                          routeBloc.routes[index].id.toString(),
-                                      textColor: Colors.white,
-                                      fontSize: 10.sp,
-                                    ),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 2.w, vertical: 1.h),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.red,
+                                  ),
+                                  child: TextWidget(
+                                    text: routeBloc.routes[index].id.toString(),
+                                    textColor: Colors.white,
+                                    fontSize: 10.sp,
                                   ),
                                 ),
                                 const HorizontalSpacing(2),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    TextWidget(
-                                      text:
-                                          "${routeBloc.routes[index].startName} - ${routeBloc.routes[index].end}",
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ],
+                                Expanded(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      TextWidget(
+                                        text:
+                                            "${routeBloc.routes[index].startName} - ${routeBloc.routes[index].end}",
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ],
+                                  ),
                                 )
                               ],
                             ),

@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:transjo/core/network/apis.dart';
 
+String basicAuth =
+    'Basic ${base64.encode(utf8.encode('11165489:60-dayfreetrial'))}';
 class DioHelper {
   static Dio? dio;
 
@@ -24,7 +28,7 @@ class DioHelper {
     dio?.options.headers = {
       'Content-Type': 'application/json',
       'lang': lang,
-      'Authorization': token
+      'Authorization': basicAuth
     };
 
     return await dio?.get(url, queryParameters: query ?? null);
@@ -40,7 +44,7 @@ class DioHelper {
     dio?.options.headers = {
       'Content-Type': 'application/json',
       'lang': lang,
-      'Authorization': token ?? ''
+      'Authorization': basicAuth
     };
     return dio!.post(url, queryParameters: query, data: data);
   }
@@ -55,7 +59,7 @@ class DioHelper {
     dio?.options.headers = {
       'Content-Type': 'application/json',
       'lang': lang,
-      'Authorization': token ?? ''
+      'Authorization': basicAuth ?? ''
     };
     return dio!.put(url, queryParameters: query, data: data);
   }

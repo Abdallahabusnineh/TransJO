@@ -3,8 +3,8 @@ import 'package:equatable/equatable.dart';
 class StopPoints extends Equatable {
   final int id;
   final String stopName;
-  final String lat;
-  final String lng;
+  final double lat;
+  final double lng;
 
   const StopPoints(
       {required this.id,

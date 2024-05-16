@@ -15,34 +15,6 @@ class MapBuilder extends StatefulWidget {
 class _MapBuilderState extends State<MapBuilder> {
   List<LatLng> polylineCoordinates = [];
 
-  ///TODO [Carlos]:::: handel it in weekend
-  // void getPolyPoints() async {
-  //   PolylinePoints polylinePoints = PolylinePoints();
-  //
-  //   PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-  //     "AIzaSyD8TtKOU4l9Ys5hhclOg9w70pO1uWzi5BU",
-  //     const PointLatLng(31.9570, 35.9549),
-  //     const PointLatLng(31.9635, 35.9085),
-  //   );
-  //   print('the result is ${result}');
-  //   if (result.points.isNotEmpty) {
-  //     result.points.forEach(
-  //       (element) {
-  //         polylineCoordinates.add(LatLng(element.latitude, element.longitude));
-  //       },
-  //     );
-  //     setState(
-  //       () {},
-  //     );
-  //   }
-  // }
-
-  @override
-  void initState() {
-    // getPolyPoints();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     MapsBloc bloc = context.read<MapsBloc>();
@@ -57,22 +29,7 @@ class _MapBuilderState extends State<MapBuilder> {
         }
         return GoogleMap(
           onMapCreated: widget.onMapCreated,
-          polylines: {
-            Polyline(
-                polylineId: PolylineId("Firstone"),
-                points: polylineCoordinates,
-                color: Colors.red,
-                width: 10)
-          },
           markers: {
-            const Marker(
-              markerId: MarkerId("start"),
-              position: LatLng(31.9570, 35.9549),
-            ),
-            const Marker(
-              markerId: MarkerId("end"),
-              position: LatLng(31.9635, 35.9085),
-            ),
             Marker(
               markerId: MarkerId("carlos"),
               position: LatLng(bloc.currentPosition!.latitude,

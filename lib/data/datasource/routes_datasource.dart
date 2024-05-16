@@ -19,8 +19,11 @@ class RoutesDatasource extends BaseRoutesDatasource {
       final res = await DioHelper.getdata(url: AppURLs.getAllRouts());
       print('i9sweeeeeeeeeee here dkdk ${res!.realUri}');
       return List<RoutsModel>.from(
-          (res!.data as List).map((e) => RoutsModel.fromJson(e)));
+          (res.data as List).map((e) => RoutsModel.fromJson(e)));
     } on DioException catch (e) {
+      print('the dddsscccsscc ${e.message}');
+      print('the dddsscccsscc ${e.response!.statusCode}');
+      print('the dddsscccsscc ${e.response!.data}');
       throw ServerExceptions(
           errorMessageModel: ErrorMessageModel.fromJson(e.message!));
     } catch (e) {

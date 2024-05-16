@@ -18,6 +18,7 @@ class RoutsModel extends Routs {
   });
 
   factory RoutsModel.fromJson(Map<String, dynamic> json) {
+    print('hte dkdkdkdkdkxxxxxxx ${json}');
     return RoutsModel(
       id: json['id'],
       startName: json['startname'],

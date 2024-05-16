@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:transjo/core/utils/tools.dart';
 import 'package:transjo/domain/entites/routs.dart';
@@ -6,12 +7,17 @@ import 'widgets/route_details_map.dart';
 
 class RoutesDetailsContent extends StatelessWidget {
   const RoutesDetailsContent({super.key, required this.route});
+
   final Routs route;
+
   @override
   Widget build(BuildContext context) {
-    return  ListView(
+    return ListView(
+      physics: NeverScrollableScrollPhysics(),
       children: [
-        const RouteDetailsMap(),
+        RouteDetailsMap(
+          route: route,
+        ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
           child: Column(
@@ -32,9 +38,12 @@ class RoutesDetailsContent extends StatelessWidget {
                     fontSize: 14.sp,
                   ),
                   const HorizontalSpacing(2),
-                  TextWidget(
-                    text: "${route.startName} - ${route.end}",
-                    fontSize: 14.sp,
+                  Expanded(
+                    child: TextWidget(
+                      text: "${route.startName} - ${route.end}",
+                      fontSize: 14.sp,
+                      maxLines: 4,
+                    ),
                   ),
                 ],
               ),
@@ -82,8 +91,8 @@ class RoutesDetailsContent extends StatelessWidget {
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     return Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 3.w, vertical: 1.h),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         color: AppColors.myGrey,
@@ -95,8 +104,10 @@ class RoutesDetailsContent extends StatelessWidget {
                       ),
                     );
                   },
-                  separatorBuilder: (context, index) => const VerticalSpacing(2),
+                  separatorBuilder: (context, index) =>
+                      const VerticalSpacing(2),
                   itemCount: route.stopPoints.length),
+              const VerticalSpacing(2),
             ],
           ),
         )
