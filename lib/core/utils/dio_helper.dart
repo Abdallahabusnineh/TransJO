@@ -2,9 +2,10 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:transjo/core/network/apis.dart';
+import 'package:transjo/core/utils/app_constanse.dart';
 
 String basicAuth =
-    'Basic ${base64.encode(utf8.encode('11165489:60-dayfreetrial'))}';
+    'Basic ${base64.encode(utf8.encode('${email}:${password}'))}';
 
 class DioHelper {
   static Dio? dio;

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:transjo/core/base_usecase/base_usecase.dart';
+import 'package:transjo/core/utils/cash_helper.dart';
 import 'package:transjo/domain/usecases/login_usecase.dart';
 
 part 'login_event.dart';
@@ -31,6 +32,10 @@ class LoginBloc extends Bloc<AbstractLoginEvent, LoginState> {
         emit(LoginServerFailure(l.message));
       }, (r) {
         //  if (r.)
+        print('the email and passwweeeooodd ${r.email} &&& ${passwordController}');
+        CashHelper.saveData(key: "email", value: r.email);
+        CashHelper.saveData(key: "password", value: r.password);
+
         emit(LoginSuccessState("Login Successfully"));
 
         // else

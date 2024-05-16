@@ -5,6 +5,7 @@ import 'package:transjo/core/utils/cash_helper.dart';
 import 'package:transjo/core/utils/dio_helper.dart';
 
 import 'app.dart';
+import 'core/utils/app_constanse.dart';
 import 'core/utils/bloc_observer.dart';
 
 Future<void> main() async {
@@ -14,6 +15,8 @@ Future<void> main() async {
   await CashHelper.init();
   Bloc.observer = MyBlocObserver();
   ServicesLocater().init();
+  email = await CashHelper.getData(key: "email") ??"";
+  password = await CashHelper.getData(key: "password") ??"";
   runApp(const App());
 }
 

@@ -21,8 +21,8 @@ class RoutsModel extends Routs {
     print('hte dkdkdkdkdkxxxxxxx ${json}');
     return RoutsModel(
       id: json['id'],
-      startName: json['startname'],
-      end: json['end'],
+      startName: json['startName'],
+      end: json['endName'],
       startLat: json['startLat'],
       startLng: json['startlng'],
       endLat: json['endlat'],
