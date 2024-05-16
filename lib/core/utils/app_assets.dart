@@ -7,6 +7,10 @@ abstract class AppAssets {
   static const String cameraIcon="${imageBase}diaphragm.png";
    static  String emailAuth="";
    static  String passwordAuth="";
-   static String basicAuth='Basic ' + base64.encode(utf8.encode('$emailAuth:$passwordAuth'));
-
+   /*static String basicAuth='Basic ' + base64.encode(utf8.encode('$emailAuth:$passwordAuth'));*/
+  static String basicAuth =
+      'Basic ${base64.encode(utf8.encode('{${emailAuth}}-{${passwordAuth}}'))}';
+  /*static String basicAuth =
+      'Basic ${base64.encode(utf8.encode('11165489:60-dayfreetrial'))}';
+*/
 }

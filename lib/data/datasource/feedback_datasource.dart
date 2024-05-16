@@ -18,7 +18,7 @@ class FeedBackDataSource extends FeedBackBaseDataSource{
     {
       "message":parameters.text
     },
-    basicAuth: AppAssets.basicAuth);
+);
     print('feed back ${result.data}');
     print('is feedback 200  ?${result.statusCode}');
     if(result.statusCode==200) {

@@ -15,7 +15,7 @@ class ChangePasswordRepository extends ChangePasswordBaseRepository{
     try{
       return Right("abod${result.toString()}");
     }on ServerExceptions catch(failure){
-      return Left(ServerFailure('abdallah'));
+      return Left(ServerFailure('change repo failure${failure.errorMessageModel.message}'));
     }
   }
 

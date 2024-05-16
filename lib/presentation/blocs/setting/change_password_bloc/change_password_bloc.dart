@@ -1,11 +1,9 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 import 'package:transjo/core/base_usecase/base_usecase.dart';
 import 'package:transjo/domain/usecases/setting/change_password_usecase.dart';
-
 part 'change_password_event.dart';
 part 'change_password_state.dart';
 
@@ -16,8 +14,6 @@ class ChangePasswordBloc extends Bloc<AbstractChangePasswordEvent, ChangePasswor
   ChangePasswordSendCodeUseCase changePasswordSendCodeUseCase;
   TextEditingController codeController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
-
   Future<FutureOr<void>> _onChangePasswordSendCodeProcessEvent(ChangePasswordSendCodeProcessEvent event, Emitter<ChangePasswordState> emit) async {
     emit(ChangePasswordSendCodeLoadingState());
     try {
@@ -30,7 +26,7 @@ class ChangePasswordBloc extends Bloc<AbstractChangePasswordEvent, ChangePasswor
         emit(ChangePasswordSendCodeSuccessState("Send Code  Successfully"));
       });
     } catch (e) {
-      print(e.toString());
+      print( 'yousef balawi ${e.toString()}');
       emit(ChangePasswordSendCodeErrorState(e.toString()));
     }
   }

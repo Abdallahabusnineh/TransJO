@@ -16,8 +16,10 @@ class RemoteDataSource extends BaseRemoteDataSource{
    final result =await DioHelper.postData(url: AppURLs.userLogin, data: {
      'email':parameters.email,
      'password':parameters.password,
-   });
+   },
 
+
+   );
    print('carlossssssssss ${result.data}');
    print('carlossssssssss ${result.statusCode}');
    if(result.statusCode==200) {
@@ -32,7 +34,8 @@ class RemoteDataSource extends BaseRemoteDataSource{
      'password':parameters.password,
      'name':parameters.name,
      'email':parameters.email,
-   });
+   },
+   );
    print('register ${result.data}');
    print('register ${result.statusCode}');
    if(result.statusCode==200) {

@@ -180,6 +180,8 @@ class LoginContent extends StatelessWidget {
                                 AppAssets.passwordAuth=bloc.passwordController.text;
                                 print('email: ${AppAssets.emailAuth}');
                                 print('password: ${AppAssets.passwordAuth}');
+                                print('basicAuth: ${AppAssets.basicAuth}');
+
                                   },
                                 child: Text(
                                   'Login',

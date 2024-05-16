@@ -41,7 +41,8 @@ class DioHelper {
     dio?.options.headers = {
       'Content-Type': 'application/json',
       'lang': lang,
-      'Authorization': basicAuth ?? ''
+      'accept': 'application/json',
+      'authorization': basicAuth,
     };
     return dio!.post(url, queryParameters: query, data: data);
   }
