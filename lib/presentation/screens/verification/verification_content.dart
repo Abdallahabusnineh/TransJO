@@ -2,13 +2,14 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:transjo/core/common_widgets/navigations_types.dart';
-import 'package:transjo/presentation/blocs/verification_bloc.dart';
+import 'package:transjo/presentation/blocs/forgotpassword/verification_bloc.dart';
+import 'package:transjo/presentation/blocs/forgotpassword/verification_state.dart';
+
 import 'package:transjo/presentation/screens/home_screen/home_view.dart';
 import 'package:transjo/presentation/screens/password_change_isdone/password_change_view.dart';
 
 class VerificationContent extends StatelessWidget {
   const VerificationContent({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     VerificationBloc  bloc=BlocProvider.of<VerificationBloc>(context);
@@ -121,12 +122,17 @@ class VerificationContent extends StatelessWidget {
                                 child: FadeInUp(
                                   duration: Duration(milliseconds: 1000),
                                   child: TextFormField(
+                                    obscureText: blocListener.showPassword,
                                     controller:bloc.newPasswordNameController,
                                     keyboardType: TextInputType.name,
                                     decoration: InputDecoration(
+
                                         hintText: 'Enter New Password',
+
                                         prefixIcon: Icon(Icons.security),
-                                        suffixIcon: Icon(Icons.remove_red_eye),
+                                        suffixIcon:IconButton(onPressed: (){
+                                          bloc.add(VerificationShowPasswordEvent());
+                                        },icon: blocListener.showPassword?Icon(Icons.visibility_off_rounded):Icon(Icons.remove_red_eye_outlined),),
                                         hintStyle: TextStyle(color: Colors.grey),
                                         border: InputBorder.none),
                                     validator: (value) {

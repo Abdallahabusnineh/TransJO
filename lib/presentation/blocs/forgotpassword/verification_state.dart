@@ -1,6 +1,4 @@
-part of 'verification_bloc.dart';
 
-@immutable
 abstract class VerificationState {}
 
 class VerificationInitialState extends VerificationState {}
@@ -18,3 +16,4 @@ class VerificationErrorState extends VerificationState {
   final String error;
   VerificationErrorState(this.error);
 }
+class VerificationIconDataChanged extends VerificationState{}

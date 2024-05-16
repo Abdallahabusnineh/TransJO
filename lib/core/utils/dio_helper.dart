@@ -5,6 +5,7 @@ import 'package:transjo/core/network/apis.dart';
 
 String basicAuth =
     'Basic ${base64.encode(utf8.encode('11165489:60-dayfreetrial'))}';
+
 class DioHelper {
   static Dio? dio;
 
@@ -31,7 +32,7 @@ class DioHelper {
       'Authorization': basicAuth
     };
 
-    return await dio?.get(url, queryParameters: query ?? null);
+    return await dio?.get(url, queryParameters: query);
   }
 
   static Future<Response> postData({
@@ -39,12 +40,14 @@ class DioHelper {
     dynamic query,
     required Map<String, dynamic> data,
     String lang = 'en',
-    String? token,
+    String? basicAuth,
+    // String? token,
   }) async {
     dio?.options.headers = {
       'Content-Type': 'application/json',
       'lang': lang,
-      'Authorization': basicAuth
+      'Authorization': basicAuth,
+      'accept': 'application/json',
     };
     return dio!.post(url, queryParameters: query, data: data);
   }

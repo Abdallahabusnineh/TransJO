@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:transjo/core/utils/tools.dart';
+import 'package:transjo/presentation/screens/change_password_byuser/verification/verification_code_changepassword_view.dart';
 import 'package:transjo/presentation/screens/forgot_password/forgotpassword_view.dart';
 import 'package:transjo/presentation/screens/home/home_view.dart';
 import 'package:transjo/presentation/screens/onboardingscreen/onBoardingScreen.dart';
+import 'package:transjo/presentation/screens/setting/setting_view.dart';
 
 import 'presentation/blocs/maps/maps_bloc.dart';
 import 'presentation/blocs/routs/routs_bloc.dart';
@@ -30,9 +32,12 @@ class App extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Trans Jo',
           theme: ThemeData(),
-          home: const HomeView(),
+
+          home: OnBoardingScreen(),
+
         ),
       );
     });
   }
 }
+
