@@ -28,7 +28,7 @@ class DioHelper {
     dio?.options.headers = {
       'Content-Type': 'application/json',
       'lang': lang,
-      'Authorization': "Bearer $token"
+      if (token != null) 'Authorization': "Bearer $token"
     };
 
     return await dio?.get(url, queryParameters: query);
@@ -44,7 +44,7 @@ class DioHelper {
     dio?.options.headers = {
       'Content-Type': 'application/json',
       // 'lang': lang,
-      'Authorization': "Bearer $token"
+      if (token != null) 'Authorization': "Bearer $token"
       // 'accept': 'application/json',
     };
     return dio!.post(url, queryParameters: query, data: data);
@@ -60,7 +60,7 @@ class DioHelper {
     dio?.options.headers = {
       'Content-Type': 'application/json',
       'lang': lang,
-      'Authorization': "Bearer $token"
+      if (token != null) 'Authorization': "Bearer $token"
     };
     return dio!.put(url, queryParameters: query, data: data);
   }
