@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:transjo/core/base_usecase/base_usecase.dart';
+import 'package:transjo/core/utils/app_constanse.dart';
 import 'package:transjo/core/utils/cash_helper.dart';
 import 'package:transjo/domain/usecases/login_usecase.dart';
 
@@ -15,6 +16,7 @@ class LoginBloc extends Bloc<AbstractLoginEvent, LoginState> {
     on<LoginStartProcessEvent>(_onLoginStartProcessEvent);
     on<ShowPasswordEvent>(_onShowPasswordEvent);
   }
+
   bool showPassword = true;
   TextEditingController emailNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -24,25 +26,26 @@ class LoginBloc extends Bloc<AbstractLoginEvent, LoginState> {
   void _onLoginStartProcessEvent(
       LoginStartProcessEvent event, Emitter emit) async {
     emit(LoginLoadingState());
-    try{
+    try {
       final result =
-      await loginUseCase.call(LoginParameter(event.email, event.password));
+          await loginUseCase.call(LoginParameter(event.email, event.password));
       result.fold((l) {
         print('carlossss ${l.message}');
         emit(LoginServerFailure(l.message));
       }, (r) {
         //  if (r.)
-        print('the email and passwweeeooodd ${r.email} &&& ${passwordController}');
+        print(
+            'the email and passwweeeooodd ${r.email} &&& ${passwordController}');
         CashHelper.saveData(key: "email", value: r.email);
         CashHelper.saveData(key: "password", value: r.password);
-
+        CashHelper.saveData(key: "token", value: r.accessToken);
+        token = r.accessToken!;
         emit(LoginSuccessState("Login Successfully"));
 
         // else
         //emit(LoginErrorState(r));
       });
-    }
-    catch(e){
+    } catch (e) {
       emit(LoginServerFailure(e.toString()));
     }
   }

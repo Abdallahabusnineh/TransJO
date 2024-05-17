@@ -3,6 +3,7 @@ import 'package:transjo/app.dart';
 import 'package:transjo/core/error/exceptions.dart';
 import 'package:transjo/core/network/apis.dart';
 import 'package:transjo/core/network/error_message_model.dart';
+import 'package:transjo/core/utils/app_constanse.dart';
 import 'package:transjo/core/utils/dio_helper.dart';
 import 'package:transjo/data/modules/routs_model.dart';
 
@@ -15,8 +16,9 @@ abstract class BaseRoutesDatasource {
 class RoutesDatasource extends BaseRoutesDatasource {
   @override
   Future<List<RoutsModel>> getAllRouts() async {
+    print('the token we want is teee ${token}');
     try {
-      final res = await DioHelper.getdata(url: AppURLs.getAllRouts());
+      final res = await DioHelper.getdata(url: AppURLs.getAllRouts(),token: token);
       print('i9sweeeeeeeeeee here dkdk ${res!.realUri}');
       return List<RoutsModel>.from(
           (res.data as List).map((e) => RoutsModel.fromJson(e)));

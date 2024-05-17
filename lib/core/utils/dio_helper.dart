@@ -1,11 +1,5 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:transjo/core/network/apis.dart';
-import 'package:transjo/core/utils/app_constanse.dart';
-
-String basicAuth =
-    'Basic ${base64.encode(utf8.encode('${email}:${password}'))}';
 
 class DioHelper {
   static Dio? dio;
@@ -14,6 +8,10 @@ class DioHelper {
     dio = Dio(BaseOptions(
       baseUrl: ApisUrl.baseURL,
       receiveDataWhenStatusError: true, //هات الداتا حتى لو ال status ايرور
+      headers: {
+        "Content-Type": "application/json",
+        "accept": "application/json",
+      },
       /* headers: {
           'Content-Type': 'application/json',// ال headers الثابتة بحطها هون دايما
        //'lang':'en', لو بدي اياه يرد علي بالانجليزي بستحدم هاي
@@ -30,7 +28,7 @@ class DioHelper {
     dio?.options.headers = {
       'Content-Type': 'application/json',
       'lang': lang,
-      'Authorization': basicAuth
+      'Authorization': "Bearer $token"
     };
 
     return await dio?.get(url, queryParameters: query);
@@ -41,14 +39,13 @@ class DioHelper {
     dynamic query,
     required Map<String, dynamic> data,
     String lang = 'en',
-    String? basicAuth,
-    // String? token,
+    String? token,
   }) async {
     dio?.options.headers = {
       'Content-Type': 'application/json',
-      'lang': lang,
-      'Authorization': basicAuth,
-      'accept': 'application/json',
+      // 'lang': lang,
+      'Authorization': "Bearer $token"
+      // 'accept': 'application/json',
     };
     return dio!.post(url, queryParameters: query, data: data);
   }
@@ -63,7 +60,7 @@ class DioHelper {
     dio?.options.headers = {
       'Content-Type': 'application/json',
       'lang': lang,
-      'Authorization': basicAuth ?? ''
+      'Authorization': "Bearer $token"
     };
     return dio!.put(url, queryParameters: query, data: data);
   }

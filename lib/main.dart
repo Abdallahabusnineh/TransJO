@@ -17,6 +17,7 @@ Future<void> main() async {
   ServicesLocater().init();
   email = await CashHelper.getData(key: "email") ??"";
   password = await CashHelper.getData(key: "password") ??"";
+  token  = await CashHelper.getData(key: "token") ??"";
   runApp(const App());
 }
 

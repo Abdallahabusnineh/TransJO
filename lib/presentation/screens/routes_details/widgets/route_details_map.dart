@@ -32,8 +32,10 @@ class _RouteDetailsMapState extends State<RouteDetailsMap> {
 
   @override
   void initState() {
-    _pGooglePlex = LatLng(widget.route.startLat, widget.route.startLng);
-    _applePark = LatLng(widget.route.endLat, widget.route.endlng);
+    _pGooglePlex = LatLng(
+        widget.route.stopPoints.first.lat, widget.route.stopPoints.first.lng);
+    _applePark = LatLng(
+        widget.route.stopPoints.last.lat, widget.route.stopPoints.last.lng);
     getLocationUpdates().then((_) => (
           getPolyLinePoints().then((polylineCoordinates) =>
               (generatePolyLineFromPoints(polylineCoordinates))),
@@ -63,12 +65,12 @@ class _RouteDetailsMapState extends State<RouteDetailsMap> {
             },
             polylines: Set<Polyline>.of(polylines.values),
             markers: {
-               Marker(
+              Marker(
                 markerId: MarkerId("_55"),
                 icon: BitmapDescriptor.defaultMarker,
                 position: _pGooglePlex,
               ),
-               Marker(
+              Marker(
                 markerId: MarkerId("_44"),
                 icon: BitmapDescriptor.defaultMarker,
                 position: _applePark,
@@ -83,7 +85,6 @@ class _RouteDetailsMapState extends State<RouteDetailsMap> {
             myLocationButtonEnabled: true,
             buildingsEnabled: true,
             myLocationEnabled: true,
-
             initialCameraPosition: CameraPosition(
               target: LatLng(
                 _pGooglePlex.latitude,
@@ -91,7 +92,6 @@ class _RouteDetailsMapState extends State<RouteDetailsMap> {
               ),
               zoom: 15.0,
             ),
-
           );
         },
       ),

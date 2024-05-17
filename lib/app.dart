@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:transjo/core/utils/tools.dart';
 import 'package:transjo/presentation/screens/home/home_view.dart';
+import 'package:transjo/presentation/screens/login/login_view.dart';
 import 'package:transjo/presentation/screens/onboardingscreen/onBoardingScreen.dart';
 
 import 'core/utils/app_constanse.dart';
@@ -13,6 +14,7 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('TOKEN ::: $token');
     return Sizer(builder: (context, orientation, deviceType) {
       return MultiBlocProvider(
         providers: [
@@ -35,10 +37,10 @@ class App extends StatelessWidget {
   }
 
   Widget startPage() {
-    if (email != "") {
-      return MainScreenView();
+    if (token != "") {
+      return const MainScreenView();
     } else {
-      return OnBoardingScreen();
+      return const OnBoardingScreen();
     }
   }
 }

@@ -30,7 +30,7 @@ class RoutsBloc extends Bloc<RoutsEvent, RoutsState> {
     emit(RoutsGetAllLoadingState());
     final result = await getAllRoutesUsecase.call();
     result.fold((l) {
-      print('carlos manyak ta3al aqued 3la zpi ${l.message}');
+      print('carlos ${l.message}');
       emit(RoutsGetAllFailState());
 
     }, (r) {

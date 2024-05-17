@@ -119,7 +119,7 @@ class _HomeContentState extends State<HomeContent> {
                                     children: [
                                       TextWidget(
                                         text:
-                                            "${routeBloc.routes[index].startName} - ${routeBloc.routes[index].end}",
+                                            "${routeBloc.routes[index].startName} - ${routeBloc.routes[index].endName}",
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ],

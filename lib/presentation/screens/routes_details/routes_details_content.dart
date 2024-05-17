@@ -40,7 +40,7 @@ class RoutesDetailsContent extends StatelessWidget {
                   const HorizontalSpacing(2),
                   Expanded(
                     child: TextWidget(
-                      text: "${route.startName} - ${route.end}",
+                      text: "${route.startName} - ${route.endName}",
                       fontSize: 14.sp,
                       maxLines: 4,
                     ),

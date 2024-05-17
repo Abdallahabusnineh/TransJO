@@ -4,7 +4,7 @@ import 'package:transjo/core/common_widgets/navigations_types.dart';
 import 'package:transjo/presentation/screens/password_change_isdone/password_change_view.dart';
 
 class UserChangePasswordContent extends StatelessWidget {
-  const UserChangePasswordContent({Key? key}) : super(key: key);
+  const UserChangePasswordContent({super.key});
 
   @override
   Widget build(BuildContext context) {

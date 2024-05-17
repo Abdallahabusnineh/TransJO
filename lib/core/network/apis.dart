@@ -4,9 +4,8 @@ abstract class ApisUrl {
 
 abstract class AppURLs {
   static String getAllRouts() {
-    return "${ApisUrl.baseURL}/routes";
+    return "${ApisUrl.baseURL}/route/routes";
   }
-
   static String getRoutById(int id) {
     return "${ApisUrl.baseURL}/routes/$id";
   }
