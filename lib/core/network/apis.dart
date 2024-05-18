@@ -7,7 +7,7 @@ abstract class AppURLs {
     return "${ApisUrl.baseURL}/route/routes";
   }
   static String getRoutById(int id) {
-    return "${ApisUrl.baseURL}/routes/$id";
+    return "${ApisUrl.baseURL}/route/routes/$id";
   }
   static String userLogin='/user/login';
   static String userRegister='/user/register';

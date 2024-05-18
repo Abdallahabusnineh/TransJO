@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+import 'package:transjo/core/utils/tools.dart';
+import 'package:transjo/presentation/blocs/routs/routs_bloc.dart';
+import 'package:transjo/presentation/screens/routes_details/routes_details_view.dart';
 
 import 'home_content.dart';
 
@@ -8,8 +10,20 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: HomeContent(),
+    return BlocListener<RoutsBloc, RoutsState>(
+      listener: (context, state) {
+        if (state is RoutsGetByIdSuccessState) {
+          navigateTo(
+            context,
+            RoutesDetailsView(
+              route: state.routs,
+            ),
+          );
+        }
+      },
+      child: Scaffold(
+        body: HomeContent(),
+      ),
     );
   }
 }

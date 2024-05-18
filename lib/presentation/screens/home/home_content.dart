@@ -8,8 +8,6 @@ import 'package:transjo/presentation/blocs/routs/routs_bloc.dart';
 import 'package:transjo/presentation/screens/maps/map_builder.dart';
 import 'package:transjo/presentation/screens/routes_details/routes_details_view.dart';
 
-import 'widgets/search_box.dart';
-
 class HomeContent extends StatefulWidget {
   const HomeContent({super.key});
 
@@ -82,11 +80,9 @@ class _HomeContentState extends State<HomeContent> {
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
-                            navigateTo(
-                                context,
-                                RoutesDetailsView(
-                                  route: routeBloc.routes[index],
-                                ));
+                            routeBloc.add(
+                                RoutsGetByIdEvent(routeBloc.routes[index].id));
+
                           },
                           child: Container(
                             padding: EdgeInsets.symmetric(

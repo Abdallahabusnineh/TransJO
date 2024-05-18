@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+import 'buses.dart';
 import 'stop_points.dart';
 
 class Routs extends Equatable {
@@ -8,6 +9,7 @@ class Routs extends Equatable {
   final String endName;
   final double fare;
   final List<StopPoints> stopPoints;
+  final List<Buses> buses;
 
   const Routs({
     required this.id,
@@ -15,6 +17,7 @@ class Routs extends Equatable {
     required this.endName,
     required this.fare,
     required this.stopPoints,
+    required this.buses,
   });
 
   @override
@@ -23,5 +26,6 @@ class Routs extends Equatable {
         startName,
         fare,
         stopPoints,
+        buses,
       ];
 }
