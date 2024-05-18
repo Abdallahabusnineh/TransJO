@@ -43,6 +43,25 @@ class FeedBackParameter extends Equatable{
   List<Object?> get props => [text];
 
 }
+class ChangePasswordVerificationParameter extends Equatable{
+  final String code;
+
+
+  ChangePasswordVerificationParameter(this.code);
+  @override
+  // TODO: implement props
+  List<Object?> get props => [code];
+
+}
+class ChangePasswordUpdatedParameter extends Equatable{
+  final String oldPassword;
+  final String newPassword;
+  ChangePasswordUpdatedParameter(this.oldPassword,this.newPassword);
+  @override
+  // TODO: implement props
+  List<Object?> get props => [oldPassword,newPassword];
+
+}
 class VerificationParameter extends Equatable{
   final String code;
   final String newPassword;

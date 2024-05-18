@@ -14,6 +14,8 @@ abstract class AppURLs {
   static String forgotPassword='/user/reset-password';
   static String verificationCode='/user/change-password';
   static String changePasswordSendCode='/user/app-reset-password';
+  static String changePasswordVerificationCode='/user/app-change-password';
+  static String changePasswordUpdated='/user/app-change-password3';
   static String feedBack='/user/report';
 
 }

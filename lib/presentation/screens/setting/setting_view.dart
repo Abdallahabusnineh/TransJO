@@ -11,19 +11,16 @@ class SettingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<ChangePasswordBloc>(),
-      child: BlocConsumer<ChangePasswordBloc, ChangePasswordState>(
-        listener: (context, state) {
-          if(state is ChangePasswordSendCodeSuccessState)
-            navigateTo(context,ChangePasswordVerificationCodeView() );
-        },
-        builder: (context, state) {
-          return Scaffold(
-            body: SettingContent(),
-          );
-        },
-      ),
+    return BlocConsumer<ChangePasswordBloc, ChangePasswordState>(
+      listener: (context, state) {
+        if(state is ChangePasswordSendCodeSuccessState)
+          navigateTo(context,ChangePasswordVerificationCodeView() );
+      },
+      builder: (context, state) {
+        return Scaffold(
+          body: SettingContent(),
+        );
+      },
     );
   }
 }

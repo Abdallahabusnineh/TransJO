@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:transjo/core/base_usecase/base_usecase.dart';
+import 'package:transjo/core/utils/app_constanse.dart';
+import 'package:transjo/core/utils/cash_helper.dart';
 import 'package:transjo/domain/usecases/register_usecase.dart';
 
 part 'register_event.dart';
@@ -35,6 +37,8 @@ class RegisterBloc extends Bloc<AbstractRegisterEvent, RegisterState> {
        print('register failure ${l.message}');
        emit(RegisterServerFailure(l.message));
      }, (r) {
+       CashHelper.saveData(key: "token", value: r.accessToken);
+       token = r.accessToken!;
        emit(RegisterSuccessState('Register Succesfull'));
      });
    }

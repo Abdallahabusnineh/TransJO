@@ -16,10 +16,12 @@ class FeedbackView extends StatelessWidget {
       create: (context) => sl<FeedBackBloc>(),
       child: BlocListener<FeedBackBloc, FeedBackState>(
         listener: (context, state) {
-      if(state is FeedBackSuccessState)
-        navigateTo(context, FeedbackIsDone());
-
-      showToast(text: 'feed back is done, we will contact with you', state: ToastState.SUCCESS);
+      if(state is FeedBackSuccessState) {
+            navigateTo(context, FeedbackIsDone());
+            showToast(
+                text: 'feed back is done, we will contact with you',
+                state: ToastState.SUCCESS);
+          }
         },
         child: Scaffold(
           body: FeedbackContent(),

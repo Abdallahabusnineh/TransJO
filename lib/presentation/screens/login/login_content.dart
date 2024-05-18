@@ -176,12 +176,6 @@ class LoginContent extends StatelessWidget {
                                 onPressed: () {
                                   if(bloc.formKey.currentState!.validate())
                                     bloc.add(LoginStartProcessEvent(email: bloc.emailNameController.text, password: bloc.passwordController.text));
-                                AppAssets.emailAuth=bloc.emailNameController.text;
-                                AppAssets.passwordAuth=bloc.passwordController.text;
-                                print('email: ${AppAssets.emailAuth}');
-                                print('password: ${AppAssets.passwordAuth}');
-                                print('basicAuth: ${AppAssets.basicAuth}');
-
                                   },
                                 child: Text(
                                   'Login',
