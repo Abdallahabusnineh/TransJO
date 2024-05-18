@@ -12,8 +12,10 @@ class UserChangePasswordContent extends StatelessWidget {
   Widget build(BuildContext context) {
     ChangePasswordBloc  bloc=BlocProvider.of<ChangePasswordBloc>(context);
     ChangePasswordBloc  blocListener=context.watch<ChangePasswordBloc>();
+    final GlobalKey<FormState> formKeyUpdatedPassword = GlobalKey<FormState>();
+
     return Form(
-      key: bloc.formKeyUpdatedPassword,
+      key: formKeyUpdatedPassword,
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
@@ -146,7 +148,7 @@ class UserChangePasswordContent extends StatelessWidget {
                                   duration: Duration(milliseconds: 1000),
                                   child: TextButton(
                                     onPressed: () {
-                                        if(bloc.formKeyUpdatedPassword.currentState!.validate())
+                                        if(formKeyUpdatedPassword.currentState!.validate())
                                       bloc.add(ChangePasswordUpdatedProcessEvent(oldPassword: bloc.currentPasswordController.text,newPassword: bloc.newPasswordController.text));
                                    print('current ${bloc.currentPasswordController.text}    new${bloc.newPasswordController.text}');
                                     },

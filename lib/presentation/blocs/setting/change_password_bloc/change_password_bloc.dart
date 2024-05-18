@@ -22,8 +22,6 @@ class ChangePasswordBloc extends Bloc<AbstractChangePasswordEvent, ChangePasswor
   TextEditingController codeController = TextEditingController();
   TextEditingController currentPasswordController = TextEditingController();
   TextEditingController newPasswordController = TextEditingController();
-   final GlobalKey<FormState> formKeyVerificationCode = GlobalKey<FormState>();
-   final GlobalKey<FormState> formKeyUpdatedPassword = GlobalKey<FormState>();
 
   Future<FutureOr<void>> _onChangePasswordSendCodeProcessEvent(ChangePasswordSendCodeProcessEvent event, Emitter<ChangePasswordState> emit) async {
     emit(ChangePasswordSendCodeLoadingState());
