@@ -7,10 +7,12 @@ import 'package:transjo/domain/usecases/routes/get_all_routes_usecase.dart';
 import 'package:transjo/domain/usecases/routes/get_routes_by_id_usecase.dart';
 
 part 'routs_event.dart';
+
 part 'routs_state.dart';
 
 class RoutsBloc extends Bloc<RoutsEvent, RoutsState> {
-  RoutsBloc(this.getAllRoutesUsecase,this.getRouteById) : super(RoutsInitial()) {
+  RoutsBloc(this.getAllRoutesUsecase, this.getRouteById)
+      : super(RoutsInitial()) {
     on<RoutsGetAllEvent>(_onRoutsGetAllEvent);
     on<RoutsGetByIdEvent>(_onRoutsGetByIdEvent);
   }
@@ -32,7 +34,6 @@ class RoutsBloc extends Bloc<RoutsEvent, RoutsState> {
     result.fold((l) {
       print('carlos ${l.message}');
       emit(RoutsGetAllFailState());
-
     }, (r) {
       log('all routes${r}');
       routes = r;
@@ -41,16 +42,18 @@ class RoutsBloc extends Bloc<RoutsEvent, RoutsState> {
   }
 
   void _onRoutsGetByIdEvent(
-      RoutsGetByIdEvent event,
+    RoutsGetByIdEvent event,
     Emitter emit,
   ) async {
-    emit(RoutsGetAllLoadingState());
+    emit(RoutsGetByIdLoadingState());
     final result = await getRouteById.call(event.id);
     result.fold((l) {
-      emit(RoutsGetAllSuccessState());
+      print('the eerrrroorrr ${l.message}');
+      emit(RoutsGetByIdFailState());
     }, (r) {
+      print('the rrrrrrrrr idididid ${r}');
       route = r;
-      emit(RoutsGetAllFailState());
+      emit(RoutsGetByIdSuccessState(route!));
     });
   }
 }

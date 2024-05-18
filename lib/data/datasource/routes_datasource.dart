@@ -37,7 +37,8 @@ class RoutesDatasource extends BaseRoutesDatasource {
   @override
   Future<RoutsModel> getRouteById(int id) async {
     try {
-      final res = await DioHelper.getdata(url: AppURLs.getRoutById(id));
+      final res = await DioHelper.getdata(url: AppURLs.getRoutById(id),token: token);
+      print('the data we want it is ${res!.data}');
       return RoutsModel.fromJson(res!.data['route']);
     } on DioException catch (e) {
       throw ServerExceptions(
