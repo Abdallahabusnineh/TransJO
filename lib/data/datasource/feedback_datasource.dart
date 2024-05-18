@@ -5,6 +5,7 @@ import 'package:transjo/core/error/exceptions.dart';
 import 'package:transjo/core/network/apis.dart';
 import 'package:transjo/core/network/error_message_model.dart';
 import 'package:transjo/core/utils/app_assets.dart';
+import 'package:transjo/core/utils/app_constanse.dart';
 import 'package:transjo/core/utils/dio_helper.dart';
 
 abstract class FeedBackBaseDataSource{
@@ -18,6 +19,7 @@ class FeedBackDataSource extends FeedBackBaseDataSource{
     {
       "message":parameters.text
     },
+      token: token
 );
     print('feed back ${result.data}');
     print('is feedback 200  ?${result.statusCode}');

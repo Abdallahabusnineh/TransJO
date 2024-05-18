@@ -20,7 +20,9 @@ import 'package:transjo/domain/usecases/login_usecase.dart';
 import 'package:transjo/domain/usecases/register_usecase.dart';
 import 'package:transjo/domain/usecases/routes/get_all_routes_usecase.dart';
 import 'package:transjo/domain/usecases/routes/get_routes_by_id_usecase.dart';
+import 'package:transjo/domain/usecases/setting/change_password_updated_usecase.dart';
 import 'package:transjo/domain/usecases/setting/change_password_usecase.dart';
+import 'package:transjo/domain/usecases/setting/change_passwprd_verification_code_usecase.dart';
 import 'package:transjo/domain/usecases/setting/feed_back_usecase.dart';
 import 'package:transjo/presentation/blocs/Login/login_bloc.dart';
 import 'package:transjo/presentation/blocs/forgotpassword/forgot_password_bloc.dart';
@@ -65,8 +67,10 @@ class ServicesLocater {
     sl.registerLazySingleton<BaseForgotPasswordDataSource>(() => ForgotPasswordDataSource());
 
     //change password
-    sl.registerFactory(() => ChangePasswordBloc(sl()));
+
     sl.registerLazySingleton(() => ChangePasswordSendCodeUseCase(sl()));
+    sl.registerLazySingleton(() => ChangePasswordVerificationCodeUseCase(sl()));
+    sl.registerLazySingleton(() => ChangePasswordUpdatedUseCase(sl()));
     sl.registerLazySingleton<ChangePasswordBaseRepository>(() => ChangePasswordRepository(
         sl()));
     sl.registerLazySingleton<ChangePasswordBaseDataSource>(() => ChangePasswordDataSource());

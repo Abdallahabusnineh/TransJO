@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:transjo/core/utils/tools.dart';
+import 'package:transjo/presentation/blocs/setting/change_password_bloc/change_password_bloc.dart';
 import 'package:transjo/presentation/screens/home/home_view.dart';
 import 'package:transjo/presentation/screens/login/login_view.dart';
 import 'package:transjo/presentation/screens/onboardingscreen/onBoardingScreen.dart';
@@ -25,6 +26,7 @@ class App extends StatelessWidget {
             create: (context) => RoutsBloc(sl(), sl())..add(RoutsGetAllEvent()),
             lazy: false,
           ),
+          BlocProvider(create: (context)=>ChangePasswordBloc(sl(), sl(),sl()))
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

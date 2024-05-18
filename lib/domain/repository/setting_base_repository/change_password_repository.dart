@@ -4,5 +4,7 @@ import 'package:transjo/core/error/failure.dart';
 
 abstract class ChangePasswordBaseRepository{
   Future<Either<Failure,String>> changePasswordSendCode(NoParameters  parameters);
+  Future<Either<Failure,String>> changePasswordVerificationCode(ChangePasswordVerificationParameter  parameters);
+  Future<Either<Failure,String>> changePasswordUpdated(ChangePasswordUpdatedParameter  parameters);
 
 }
