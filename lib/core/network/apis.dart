@@ -1,5 +1,5 @@
 abstract class ApisUrl {
-  static const String baseURL = "https://tran-4rhc.onrender.com/api";
+  static const String baseURL = "https://tran-4rhc.onrender.com";
 }
 
 abstract class AppURLs {
@@ -9,13 +9,14 @@ abstract class AppURLs {
   static String getRoutById(int id) {
     return "${ApisUrl.baseURL}/route/routes/$id";
   }
-  static String userLogin='/user/login';
-  static String userRegister='/user/register';
-  static String forgotPassword='/user/reset-password';
-  static String verificationCode='/user/change-password';
-  static String changePasswordSendCode='/user/app-reset-password';
-  static String changePasswordVerificationCode='/user/app-change-password';
-  static String changePasswordUpdated='/user/app-change-password3';
-  static String feedBack='/user/report';
+  static String userLogin='/api/user/login';
+  static String userRegister='/api/user/register';
+  static String forgotPassword='/api/user/reset-password';
+  static String verificationCode='/api/user/change-password';
+  static String changePasswordSendCode='/api/user/app-reset-password';
+  static String changePasswordVerificationCode='/api/user/app-change-password';
+  static String changePasswordUpdated='/api/user/app-change-password3';
+  static String feedBack='/api/user/report';
+  static String logout='/logout';
 
 }

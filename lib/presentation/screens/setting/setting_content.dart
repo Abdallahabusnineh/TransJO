@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:transjo/core/common_widgets/navigations_types.dart';
+import 'package:transjo/core/common_widgets/show_toast.dart';
+import 'package:transjo/core/services/services_locater.dart';
+import 'package:transjo/presentation/blocs/Login/login_bloc.dart';
 import 'package:transjo/presentation/blocs/setting/change_password_bloc/change_password_bloc.dart';
+import 'package:transjo/presentation/blocs/setting/logout/logout_bloc.dart';
 import 'package:transjo/presentation/screens/about_us_screen/about_us_view.dart';
-import 'package:transjo/presentation/screens/change_password_byuser/user_change_password_view.dart';
+import 'package:transjo/presentation/screens/change_password_byuser/verification/verification_code_changepassword_view.dart';
 import 'package:transjo/presentation/screens/feedback_screen/feedback_view.dart';
 import 'package:transjo/presentation/screens/login/login_view.dart';
 import 'package:transjo/presentation/screens/policy/policy_view.dart';
@@ -14,8 +18,9 @@ class SettingContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ChangePasswordBloc  bloc=BlocProvider.of<ChangePasswordBloc>(context);
-    ChangePasswordBloc  blocListener=context.watch<ChangePasswordBloc>();
+    ChangePasswordBloc bloc = BlocProvider.of<ChangePasswordBloc>(context);
+    ChangePasswordBloc blocListener = context.watch<ChangePasswordBloc>();
+
     return SingleChildScrollView(
       child: Column(children: [
         Container(
@@ -82,31 +87,52 @@ class SettingContent extends StatelessWidget {
         SizedBox(
           height: 10,
         ),
-        blocListener.state is ChangePasswordSendCodeLoadingState?Center(child: CircularProgressIndicator(color: Colors.blue.shade700,)):
-        Row(
-          children: [
-            TextButton(
-                onPressed: () {
-                 bloc.add(ChangePasswordSendCodeProcessEvent());
+        blocListener.state is ChangePasswordSendCodeLoadingState
+            ? Center(
+                child: CircularProgressIndicator(
+                color: Colors.blue.shade700,
+              ))
+            : BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
+                builder: (context, state) {
+                  return Row(
+                    children: [
+                      TextButton(
+                          onPressed: () {
+                            bloc.add(ChangePasswordSendCodeProcessEvent());
+                            if (state is ChangePasswordSendCodeSuccessState) {
+                              navigateTo(context,
+                                  ChangePasswordVerificationCodeView());
+                              showToast(
+                                  text: 'send code successfully',
+                                  state: ToastState.SUCCESS);
+                            }
+                          },
+                          child: Text(
+                            'Change Password',
+                            style: TextStyle(color: Colors.grey, fontSize: 20),
+                          )),
+                      Spacer(),
+                      Container(
+                        child: IconButton(
+                          onPressed: () {
+                            bloc.add(ChangePasswordSendCodeProcessEvent());
+                            if (state is ChangePasswordSendCodeSuccessState) {
+                              navigateTo(context,
+                                  ChangePasswordVerificationCodeView());
+                              showToast(
+                                  text: 'send code successfully',
+                                  state: ToastState.SUCCESS);
+                            }
+                          },
+                          icon: Icon(
+                            Icons.arrow_forward_ios_sharp,
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
                 },
-                child: Text(
-                  'Change Password',
-                  style: TextStyle(color: Colors.grey, fontSize: 20),
-                )),
-            Spacer(),
-            Container(
-              child: IconButton(
-                onPressed: () {
-                  bloc.add(ChangePasswordSendCodeProcessEvent());
-               //   navigateTo(context, UserChangePasswordView());
-                },
-                icon: Icon(
-                  Icons.arrow_forward_ios_sharp,
-                ),
               ),
-            ),
-          ],
-        ),
         SizedBox(
           height: 30,
         ),
@@ -210,23 +236,43 @@ class SettingContent extends StatelessWidget {
         SizedBox(
           height: 30,
         ),
-        Container(
-          child: ElevatedButton(
-            onPressed: () {
-              navigateTo(context, LoginScreen());
+        BlocProvider(
+          create: (context) => LogoutBloc(sl()),
+          child: BlocBuilder<LogoutBloc, LogoutState>(
+            builder: (context, state) {
+              LogoutBloc blocLogout = BlocProvider.of<LogoutBloc>(context);
+              LogoutBloc blocListenerLogOut = context.watch<LogoutBloc>();
+              return state is LoginLoadingState
+                  ? CircularProgressIndicator(
+                      color: Colors.blue.shade700,
+                    )
+                  : Container(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          blocLogout.add(LogoutStartProcessEvent());
+                          if (state is LogoutSuccessState) {
+                            navigateTo(context, LoginScreen());
+                            showToast(
+                                text: 'Logout is done',
+                                state: ToastState.SUCCESS);
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 100, vertical: 20),
+                            // Adjust padding for bigger size
+                            backgroundColor: Color.fromARGB(255, 21, 101, 192)),
+                        child: Text('Log Out',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            )),
+                      ),
+                      decoration: BoxDecoration(),
+                    );
             },
-            style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(horizontal: 100, vertical: 20),
-                // Adjust padding for bigger size
-                backgroundColor: Color.fromARGB(255, 21, 101, 192)),
-            child: Text('Log Out',
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                )),
           ),
-          decoration: BoxDecoration(),
         )
       ]),
     );
