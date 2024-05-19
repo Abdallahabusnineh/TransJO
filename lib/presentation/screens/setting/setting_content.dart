@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:transjo/core/common_widgets/navigations_types.dart';
 import 'package:transjo/core/common_widgets/show_toast.dart';
 import 'package:transjo/core/services/services_locater.dart';
-import 'package:transjo/presentation/blocs/Login/login_bloc.dart';
 import 'package:transjo/presentation/blocs/setting/change_password_bloc/change_password_bloc.dart';
 import 'package:transjo/presentation/blocs/setting/logout/logout_bloc.dart';
 import 'package:transjo/presentation/screens/about_us_screen/about_us_view.dart';
@@ -87,22 +86,77 @@ class SettingContent extends StatelessWidget {
         SizedBox(
           height: 10,
         ),
-        blocListener.state is ChangePasswordSendCodeLoadingState
-            ? Center(
-                child: CircularProgressIndicator(
-                color: Colors.blue.shade700,
-              ))
-            : Row(
+        BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
+          builder: (context, state) {
+            if (state is ChangePasswordSendCodeLoadingState) {
+              return Center(child: CircularProgressIndicator());
+            } else {
+              return Row(
                 children: [
                   TextButton(
                       onPressed: () {
                         bloc.add(ChangePasswordSendCodeProcessEvent());
+                     if(state is ChangePasswordSendCodeSuccessState)
+                        {
                           navigateTo(
                               context, ChangePasswordVerificationCodeView());
                           showToast(
                               text: 'send code successfully',
                               state: ToastState.SUCCESS);
+                        }
+                     else {
+                       showToast(
+                         text: 'Server failure',
+                         state: ToastState.ERROR);
+                     }
 
+            },
+                      child: Text(
+                        'Change Password',
+                        style: TextStyle(color: Colors.grey, fontSize: 20),
+                      )),
+                  Spacer(),
+                  Container(
+                    child: IconButton(
+                      onPressed: () {
+                        bloc.add(ChangePasswordSendCodeProcessEvent());
+                        if(state is ChangePasswordSendCodeSuccessState) {
+                          navigateTo(
+                              context, ChangePasswordVerificationCodeView());
+                          showToast(
+                              text: 'send code successfully',
+                              state: ToastState.SUCCESS);
+                        }
+                        else{
+                          showToast(text: 'server failure', state: ToastState.ERROR);
+                        }
+                      },icon: Icon(
+                        Icons.arrow_forward_ios_sharp,
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            }
+
+            //return SizedBox();
+          },
+        ),
+
+        /*: Row(
+                children: [
+                  TextButton(
+                      onPressed: () {
+                        bloc.add(ChangePasswordSendCodeProcessEvent());
+                        if (blocListener.state
+                            is ChangePasswordSendCodeSuccessState) {
+                          navigateTo(
+                              context, ChangePasswordVerificationCodeView());
+                          showToast(
+                              text: 'send code successfully',
+                              state: ToastState.SUCCESS);
+                        } else
+                          showToast(text: 'error', state: ToastState.ERROR);
                       },
                       child: Text(
                         'Change Password',
@@ -113,21 +167,23 @@ class SettingContent extends StatelessWidget {
                     child: IconButton(
                       onPressed: () {
                         bloc.add(ChangePasswordSendCodeProcessEvent());
-
+                        if (blocListener.state
+                        is ChangePasswordSendCodeSuccessState) {
                           navigateTo(
                               context, ChangePasswordVerificationCodeView());
                           showToast(
                               text: 'send code successfully',
                               state: ToastState.SUCCESS);
-
-                      },
+                        } else
+                          showToast(text: 'error', state: ToastState.ERROR);
+                        },
                       icon: Icon(
                         Icons.arrow_forward_ios_sharp,
                       ),
                     ),
                   ),
                 ],
-              ),
+              ),*/
         SizedBox(
           height: 30,
         ),
@@ -232,37 +288,42 @@ class SettingContent extends StatelessWidget {
           height: 30,
         ),
         BlocProvider(
-          create: (context) => LogoutBloc(sl())..add(LogoutStartProcessEvent()),
+          create: (context) => LogoutBloc(sl()),
           child: BlocBuilder<LogoutBloc, LogoutState>(
             builder: (context, state) {
-
-              return state is LoginLoadingState
+              LogoutBloc blocLogout = BlocProvider.of<LogoutBloc>(context);
+              return state is LogoutLoadingState
                   ? CircularProgressIndicator(
-                      color: Colors.blue.shade700,
-                    )
+                color: Colors.blue.shade700,
+              )
                   : Container(
-                      child: ElevatedButton(
-                        onPressed: () {
-                            navigateTo(context, LoginScreen());
-                            showToast(
-                                text: 'Logout is done',
-                                state: ToastState.SUCCESS);
-
-                        },
-                        style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 100, vertical: 20),
-                            // Adjust padding for bigger size
-                            backgroundColor: Color.fromARGB(255, 21, 101, 192)),
-                        child: Text('Log Out',
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            )),
-                      ),
-                      decoration: BoxDecoration(),
-                    );
+                child: ElevatedButton(
+                  onPressed: () {
+                    blocLogout.add(LogoutStartProcessEvent());
+                    /* if (state is LogoutSuccessState) {*/
+                    navigateTo(context, LoginScreen());
+                    showToast(
+                        text: 'Logout is done',
+                        state: ToastState.SUCCESS);
+                    /* }
+                       //   else
+                            showToast(text: 'Logout is failued', state: ToastState.ERROR);
+                        */
+                  },
+                  style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 100, vertical: 20),
+                      // Adjust padding for bigger size
+                      backgroundColor: Color.fromARGB(255, 21, 101, 192)),
+                  child: Text('Log Out',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      )),
+                ),
+                decoration: BoxDecoration(),
+              );
             },
           ),
         )
