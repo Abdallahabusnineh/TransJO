@@ -15,7 +15,7 @@ class LogOutDataSource extends LogOutBaseDataSource {
   @override
   Future<String> logout(NoParameters parameters) async {
     try {
-      final result = await DioHelper.getdata(url: AppURLs.logout, token: token);
+      final result = await DioHelper.getdata(url: AppURLs.logout, token : token);
       if (result?.statusCode == 200) {
         return result?.data;
       } else {

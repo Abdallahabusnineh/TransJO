@@ -18,5 +18,6 @@ abstract class AppURLs {
   static String changePasswordUpdated='/api/user/app-change-password3';
   static String feedBack='/api/user/report';
   static String logout='/logout';
+  static String userDetails='/api/user/details';
 
 }

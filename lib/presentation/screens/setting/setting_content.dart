@@ -92,46 +92,41 @@ class SettingContent extends StatelessWidget {
                 child: CircularProgressIndicator(
                 color: Colors.blue.shade700,
               ))
-            : BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
-                builder: (context, state) {
-                  return Row(
-                    children: [
-                      TextButton(
-                          onPressed: () {
-                            bloc.add(ChangePasswordSendCodeProcessEvent());
-                            if (state is ChangePasswordSendCodeSuccessState) {
-                              navigateTo(context,
-                                  ChangePasswordVerificationCodeView());
-                              showToast(
-                                  text: 'send code successfully',
-                                  state: ToastState.SUCCESS);
-                            }
-                          },
-                          child: Text(
-                            'Change Password',
-                            style: TextStyle(color: Colors.grey, fontSize: 20),
-                          )),
-                      Spacer(),
-                      Container(
-                        child: IconButton(
-                          onPressed: () {
-                            bloc.add(ChangePasswordSendCodeProcessEvent());
-                            if (state is ChangePasswordSendCodeSuccessState) {
-                              navigateTo(context,
-                                  ChangePasswordVerificationCodeView());
-                              showToast(
-                                  text: 'send code successfully',
-                                  state: ToastState.SUCCESS);
-                            }
-                          },
-                          icon: Icon(
-                            Icons.arrow_forward_ios_sharp,
-                          ),
-                        ),
+            : Row(
+                children: [
+                  TextButton(
+                      onPressed: () {
+                        bloc.add(ChangePasswordSendCodeProcessEvent());
+                          navigateTo(
+                              context, ChangePasswordVerificationCodeView());
+                          showToast(
+                              text: 'send code successfully',
+                              state: ToastState.SUCCESS);
+
+                      },
+                      child: Text(
+                        'Change Password',
+                        style: TextStyle(color: Colors.grey, fontSize: 20),
+                      )),
+                  Spacer(),
+                  Container(
+                    child: IconButton(
+                      onPressed: () {
+                        bloc.add(ChangePasswordSendCodeProcessEvent());
+
+                          navigateTo(
+                              context, ChangePasswordVerificationCodeView());
+                          showToast(
+                              text: 'send code successfully',
+                              state: ToastState.SUCCESS);
+
+                      },
+                      icon: Icon(
+                        Icons.arrow_forward_ios_sharp,
                       ),
-                    ],
-                  );
-                },
+                    ),
+                  ),
+                ],
               ),
         SizedBox(
           height: 30,
@@ -237,11 +232,10 @@ class SettingContent extends StatelessWidget {
           height: 30,
         ),
         BlocProvider(
-          create: (context) => LogoutBloc(sl()),
+          create: (context) => LogoutBloc(sl())..add(LogoutStartProcessEvent()),
           child: BlocBuilder<LogoutBloc, LogoutState>(
             builder: (context, state) {
-              LogoutBloc blocLogout = BlocProvider.of<LogoutBloc>(context);
-              LogoutBloc blocListenerLogOut = context.watch<LogoutBloc>();
+
               return state is LoginLoadingState
                   ? CircularProgressIndicator(
                       color: Colors.blue.shade700,
@@ -249,13 +243,11 @@ class SettingContent extends StatelessWidget {
                   : Container(
                       child: ElevatedButton(
                         onPressed: () {
-                          blocLogout.add(LogoutStartProcessEvent());
-                          if (state is LogoutSuccessState) {
                             navigateTo(context, LoginScreen());
                             showToast(
                                 text: 'Logout is done',
                                 state: ToastState.SUCCESS);
-                          }
+
                         },
                         style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.symmetric(
