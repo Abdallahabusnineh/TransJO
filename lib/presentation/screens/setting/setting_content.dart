@@ -5,6 +5,7 @@ import 'package:transjo/core/common_widgets/show_toast.dart';
 import 'package:transjo/core/services/services_locater.dart';
 import 'package:transjo/presentation/blocs/setting/change_password_bloc/change_password_bloc.dart';
 import 'package:transjo/presentation/blocs/setting/logout/logout_bloc.dart';
+import 'package:transjo/presentation/blocs/setting/user_details/user_details_bloc.dart';
 import 'package:transjo/presentation/screens/about_us_screen/about_us_view.dart';
 import 'package:transjo/presentation/screens/change_password_byuser/verification/verification_code_changepassword_view.dart';
 import 'package:transjo/presentation/screens/feedback_screen/feedback_view.dart';
@@ -17,8 +18,8 @@ class SettingContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ChangePasswordBloc bloc = BlocProvider.of<ChangePasswordBloc>(context);
-    ChangePasswordBloc blocListener = context.watch<ChangePasswordBloc>();
+    // ChangePasswordBloc bloc = BlocProvider.of<ChangePasswordBloc>(context);
+    // ChangePasswordBloc blocListener = context.watch<ChangePasswordBloc>();
 
     return SingleChildScrollView(
       child: Column(children: [
@@ -86,63 +87,102 @@ class SettingContent extends StatelessWidget {
         SizedBox(
           height: 10,
         ),
-        BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
-          builder: (context, state) {
-            if (state is ChangePasswordSendCodeLoadingState) {
-              return Center(child: CircularProgressIndicator());
-            } else {
-              return Row(
-                children: [
-                  TextButton(
-                      onPressed: () {
-                        bloc.add(ChangePasswordSendCodeProcessEvent());
-                     if(state is ChangePasswordSendCodeSuccessState)
-                        {
-                          navigateTo(
-                              context, ChangePasswordVerificationCodeView());
-                          showToast(
-                              text: 'send code successfully',
-                              state: ToastState.SUCCESS);
-                        }
-                     else {
-                       showToast(
-                         text: 'Server failure',
-                         state: ToastState.ERROR);
-                     }
-
-            },
-                      child: Text(
-                        'Change Password',
-                        style: TextStyle(color: Colors.grey, fontSize: 20),
-                      )),
-                  Spacer(),
-                  Container(
-                    child: IconButton(
-                      onPressed: () {
-                        bloc.add(ChangePasswordSendCodeProcessEvent());
-                        if(state is ChangePasswordSendCodeSuccessState) {
-                          navigateTo(
-                              context, ChangePasswordVerificationCodeView());
-                          showToast(
-                              text: 'send code successfully',
-                              state: ToastState.SUCCESS);
-                        }
-                        else{
-                          showToast(text: 'server failure', state: ToastState.ERROR);
-                        }
-                      },icon: Icon(
-                        Icons.arrow_forward_ios_sharp,
-                      ),
+        // BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
+        //   builder: (context, state) {
+        //     if (state is ChangePasswordSendCodeLoadingState) {
+        //       return Center(child: CircularProgressIndicator());
+        //     } else {
+        //       return Row(
+        //         children: [
+        //           TextButton(
+        //               onPressed: () {
+        //                 bloc.add(ChangePasswordSendCodeProcessEvent());
+        //                 if (state is ChangePasswordSendCodeSuccessState) {
+        //                   navigateTo(
+        //                       context, ChangePasswordVerificationCodeView());
+        //                   showToast(
+        //                       text: 'send code successfully',
+        //                       state: ToastState.SUCCESS);
+        //                 }
+        //                 else {
+        //                   showToast(
+        //                       text: 'Server failure',
+        //                       state: ToastState.ERROR);
+        //                 }
+        //               },
+        //               child: Text(
+        //                 'Change Password',
+        //                 style: TextStyle(color: Colors.grey, fontSize: 20),
+        //               )),
+        //           Spacer(),
+        //           Container(
+        //             child: IconButton(
+        //               onPressed: () {
+        //                 bloc.add(ChangePasswordSendCodeProcessEvent());
+        //                 if (state is ChangePasswordSendCodeSuccessState) {
+        //                   navigateTo(
+        //                       context, ChangePasswordVerificationCodeView());
+        //                   showToast(
+        //                       text: 'send code successfully',
+        //                       state: ToastState.SUCCESS);
+        //                 }
+        //                 else {
+        //                   showToast(text: 'server failure',
+        //                       state: ToastState.ERROR);
+        //                 }
+        //               }, icon: Icon(
+        //               Icons.arrow_forward_ios_sharp,
+        //             ),
+        //             ),
+        //           ),
+        //         ],
+        //       );
+        //     }
+        //
+        //     //return SizedBox();
+        //   },
+        // ),
+        BlocConsumer<ChangePasswordBloc, ChangePasswordState>(
+          listener: (context, state) {
+            if (state is ChangePasswordSendCodeSuccessState){
+              navigateTo(context, ChangePasswordVerificationCodeView());
+              showToast(text: 'Success Send Code', state: ToastState.SUCCESS);
+            }
+            if(state is ChangePasswordSendCodeServerFailureState)
+              {
+                showToast(text: 'Server Failuar', state: ToastState.ERROR);
+              }
+          },
+          builder: (BuildContext context, ChangePasswordState state) {
+            return state is ChangePasswordSendCodeLoadingState ?CircularProgressIndicator(
+              color: Colors.blue.shade700,
+            )
+            : Row(
+              children: [
+                TextButton(
+                    onPressed: () {
+                      context.read<ChangePasswordBloc>().add(ChangePasswordSendCodeProcessEvent());
+                    },
+                    child: Text(
+                      'Change Password',
+                      style: TextStyle(color: Colors.grey, fontSize: 20),
+                    )),
+                Spacer(),
+                Container(
+                  child: IconButton(
+                    onPressed: () {
+                      context.read<ChangePasswordBloc>().add(ChangePasswordSendCodeProcessEvent());
+                    },
+                    icon: Icon(
+                      Icons.arrow_forward_ios_sharp,
                     ),
                   ),
-                ],
-              );
-            }
-
-            //return SizedBox();
+                ),
+              ],
+            );
           },
-        ),
 
+        ),
         /*: Row(
                 children: [
                   TextButton(

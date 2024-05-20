@@ -41,8 +41,8 @@ class ChangePasswordDone extends StatelessWidget {
                       onPressed: () {
                         navigateTo(context, MainScreenView());
                       },
-                      child: Text(
-                        'Go to login',
+                      child: const Text(
+                        'Done',
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold),
