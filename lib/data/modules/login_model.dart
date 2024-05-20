@@ -7,10 +7,12 @@ class LoginUserDataModel extends LoginUserData {
       required super.email,
       required super.accessToken});
 
-  factory LoginUserDataModel.fromJson(Map<String, dynamic> json) =>
-      LoginUserDataModel(
+  factory LoginUserDataModel.fromJson(Map<String, dynamic> json) {
+    print('kdkdkd ${json}');
+    return LoginUserDataModel(
           fullName: json['fullName'],
           accessToken: json['access_token'],
           password: json['password'],
           email: json['email']);
+  }
 }
