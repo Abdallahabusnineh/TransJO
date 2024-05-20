@@ -12,8 +12,10 @@ class ChangePasswordVerificationCodeContent extends StatelessWidget {
   Widget build(BuildContext context) {
     ChangePasswordBloc  bloc=BlocProvider.of<ChangePasswordBloc>(context);
     ChangePasswordBloc  blocListener=context.watch<ChangePasswordBloc>();
+    final GlobalKey<FormState> formKeyVerificationCode = GlobalKey<FormState>();
+
     return Form(
-      key: bloc.formKeyVerificationCode,
+      key: formKeyVerificationCode,
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
@@ -122,7 +124,7 @@ class ChangePasswordVerificationCodeContent extends StatelessWidget {
                                   duration: Duration(milliseconds: 1000),
                                   child: TextButton(
                                     onPressed: () {
-                                      if(bloc.formKeyVerificationCode.currentState!.validate())
+                                      if(formKeyVerificationCode.currentState!.validate())
                                         bloc.add(ChangePasswordVerificationCodeProcessEvent(code:  bloc.codeController.text));
                                       print(bloc.codeController.text);
                                     },

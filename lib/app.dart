@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:transjo/core/utils/tools.dart';
 import 'package:transjo/presentation/blocs/setting/change_password_bloc/change_password_bloc.dart';
+import 'package:transjo/presentation/blocs/setting/logout/logout_bloc.dart';
 import 'package:transjo/presentation/screens/home/home_view.dart';
 import 'package:transjo/presentation/screens/login/login_view.dart';
 import 'package:transjo/presentation/screens/onboardingscreen/onBoardingScreen.dart';
-
 import 'core/utils/app_constanse.dart';
 import 'presentation/blocs/maps/maps_bloc.dart';
 import 'presentation/blocs/routs/routs_bloc.dart';
@@ -26,7 +26,8 @@ class App extends StatelessWidget {
             create: (context) => RoutsBloc(sl(), sl())..add(RoutsGetAllEvent()),
             lazy: false,
           ),
-          BlocProvider(create: (context)=>ChangePasswordBloc(sl(), sl(),sl()))
+          BlocProvider(create: (context)=>ChangePasswordBloc(sl(), sl(),sl())),
+      //BlocProvider(create: (context)=>LogoutBloc(sl()))
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

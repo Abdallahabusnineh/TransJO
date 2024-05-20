@@ -2,8 +2,8 @@ import 'package:equatable/equatable.dart';
 
 class LoginUserData extends Equatable {
   final String ?password;
-  final String ?fullName;
   final String ?email;
+  final String ?fullName;
   final String ?accessToken;
 
 

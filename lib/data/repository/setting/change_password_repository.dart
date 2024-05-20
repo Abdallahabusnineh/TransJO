@@ -40,7 +40,7 @@ class ChangePasswordRepository extends ChangePasswordBaseRepository {
     final result = await changePasswordBaseDataSource
         .ChangePasswordUpdated(parameters);
     try {
-      return Right("abod${result.toString()}");
+      return Right(result);
     } on ServerExceptions catch (failure) {
       return Left(ServerFailure(
           'change repo failure${failure.errorMessageModel.message}'));

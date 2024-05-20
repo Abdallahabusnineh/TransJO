@@ -34,10 +34,10 @@ class LoginBloc extends Bloc<AbstractLoginEvent, LoginState> {
         emit(LoginServerFailure(l.message));
       }, (r) {
         //  if (r.)
-        // print(
-        //     'the email and passwweeeooodd ${r.email} &&& ${password}');
-        // CashHelper.saveData(key: "email", value: r.email);
-        // CashHelper.saveData(key: "password", value: r.password);
+        print(
+            'the email and passwweeeooodd ${r.email} &&& ${password}');
+        CashHelper.saveData(key: "email", value: r.email);
+        CashHelper.saveData(key: "password", value: r.password);
         CashHelper.saveData(key: "token", value: r.accessToken);
         token = r.accessToken!;
         emit(LoginSuccessState("Login Successfully"));

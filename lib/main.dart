@@ -15,8 +15,8 @@ Future<void> main() async {
   await CashHelper.init();
   Bloc.observer = MyBlocObserver();
   ServicesLocater().init();
-  email = await CashHelper.getData(key: "email") ??"";
-  password = await CashHelper.getData(key: "password") ??"";
+ /* email = await CashHelper.getData(key: "email") ??"";
+  password = await CashHelper.getData(key: "password") ??"";*/
   token  = await CashHelper.getData(key: "token") ??"";
   runApp(const App());
 }
