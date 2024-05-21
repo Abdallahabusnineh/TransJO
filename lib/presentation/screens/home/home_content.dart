@@ -8,6 +8,8 @@ import 'package:transjo/presentation/blocs/routs/routs_bloc.dart';
 import 'package:transjo/presentation/screens/maps/map_builder.dart';
 import 'package:transjo/presentation/screens/routes_details/routes_details_view.dart';
 
+import 'widgets/search_box.dart';
+
 class HomeContent extends StatefulWidget {
   const HomeContent({super.key});
 
@@ -29,7 +31,7 @@ class _HomeContentState extends State<HomeContent> {
         Container(
           height: 50.h,
           width: double.infinity,
-          // margin: EdgeInsets.only(top: 15.h),
+          margin: EdgeInsets.only(top: 15.h),
           decoration: const BoxDecoration(
             color: AppColors.myGrey,
           ),
@@ -41,11 +43,11 @@ class _HomeContentState extends State<HomeContent> {
           ),
         ),
         Column(children: [
-          // const VerticalSpacing(4),
-          // const SearchBox(),
+          const VerticalSpacing(4),
+          const SearchBox(),
           const Spacer(),
           Container(
-            height: 50.h,
+            height: 40.h,
             width: 100.w,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30), color: Colors.white),

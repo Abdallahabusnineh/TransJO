@@ -29,4 +29,24 @@ class RoutesRepository extends BaseRoutsRepositories {
       return Left(ServerFailure(e.errorMessageModel.message));
     }
   }
+
+  @override
+  Future<Either<Failure, String>> addRouteToFav(int id) async{
+     try{
+       final result = await baseRoutesDatasource.addRouteToFav(id);
+       return Right(result);
+     }on ServerExceptions catch(e){
+      return Left(ServerFailure(e.errorMessageModel.message));
+     }
+  }
+
+  @override
+  Future<Either<Failure, List<Routs>>> getAllFavRoutes() async{
+    try{
+      final result = await baseRoutesDatasource.getAllFavRoutes();
+      return Right(result);
+    }on ServerExceptions catch(e){
+      return Left(ServerFailure(e.errorMessageModel.message));
+    }
+  }
 }

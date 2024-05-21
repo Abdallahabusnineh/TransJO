@@ -15,12 +15,14 @@ class RoutsBloc extends Bloc<RoutsEvent, RoutsState> {
       : super(RoutsInitial()) {
     on<RoutsGetAllEvent>(_onRoutsGetAllEvent);
     on<RoutsGetByIdEvent>(_onRoutsGetByIdEvent);
+    on<RoutsSearchEvent>(_onRoutsSearchEvent);
   }
 
   GetAllRoutesUsecase getAllRoutesUsecase;
   GetRouteByIdUsecase getRouteById;
 
   List<Routs> routes = [];
+  List<Routs> searchRoutes = [];
 
   Routs? route;
 
@@ -55,5 +57,19 @@ class RoutsBloc extends Bloc<RoutsEvent, RoutsState> {
       route = r;
       emit(RoutsGetByIdSuccessState(route!));
     });
+  }
+
+  void _onRoutsSearchEvent(
+    RoutsSearchEvent event,
+    Emitter emit,
+  ) async {
+    emit(RoutsSearchPointsLoadingState());
+    searchRoutes = routes
+        .where((element) =>
+            element.startName.toLowerCase().contains(event.val.toLowerCase()) ||
+            element.endName.toLowerCase().contains(event.val.toLowerCase()))
+        .toList();
+    log('the search Routes is ${searchRoutes}');
+    emit(RoutsSearchPointsSuccessState());
   }
 }

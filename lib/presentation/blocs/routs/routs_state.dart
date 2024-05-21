@@ -22,3 +22,7 @@ final class RoutsGetByIdSuccessState extends RoutsState {
 }
 
 final class RoutsGetByIdFailState extends RoutsState {}
+///-------------------------------------------------------
+final class RoutsSearchPointsLoadingState extends RoutsState {}
+final class RoutsSearchPointsSuccessState extends RoutsState {}
+final class RoutsSearchPointsFailState extends RoutsState {}

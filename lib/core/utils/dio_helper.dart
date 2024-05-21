@@ -25,9 +25,10 @@ class DioHelper {
     String lang = 'en',
     String? token,
   }) async {
+    print('hte token in get >>>> ${token}');
     dio?.options.headers = {
       'Content-Type': 'application/json',
-      'lang': lang,
+      // 'lang': lang,
       if (token != null) 'Authorization': "Bearer $token"
     };
 
