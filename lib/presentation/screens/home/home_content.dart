@@ -5,10 +5,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:transjo/core/utils/tools.dart';
 import 'package:transjo/presentation/blocs/maps/maps_bloc.dart';
 import 'package:transjo/presentation/blocs/routs/routs_bloc.dart';
+import 'package:transjo/presentation/screens/all_routes/all_routes_view.dart';
 import 'package:transjo/presentation/screens/maps/map_builder.dart';
 import 'package:transjo/presentation/screens/routes_details/routes_details_view.dart';
-
-import 'widgets/search_box.dart';
 
 class HomeContent extends StatefulWidget {
   const HomeContent({super.key});
@@ -31,7 +30,7 @@ class _HomeContentState extends State<HomeContent> {
         Container(
           height: 50.h,
           width: double.infinity,
-          margin: EdgeInsets.only(top: 15.h),
+          // margin: EdgeInsets.only(top: 15.h),
           decoration: const BoxDecoration(
             color: AppColors.myGrey,
           ),
@@ -43,8 +42,6 @@ class _HomeContentState extends State<HomeContent> {
           ),
         ),
         Column(children: [
-          const VerticalSpacing(4),
-          const SearchBox(),
           const Spacer(),
           Container(
             height: 40.h,
@@ -68,7 +65,7 @@ class _HomeContentState extends State<HomeContent> {
                       const Spacer(),
                       CustomTextButtons(
                         onPressed: () {
-                          // navigateTo(context, const BusRoutsView());
+                          navigateTo(context, const AllRoutesView());
                         },
                         text: "All routs",
                       )
@@ -76,61 +73,88 @@ class _HomeContentState extends State<HomeContent> {
                   ),
                   const VerticalSpacing(1),
                   ListView.separated(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      padding: EdgeInsets.only(bottom: 1.h),
-                      itemBuilder: (context, index) {
-                        return InkWell(
-                          onTap: () {
-                            routeBloc.add(
-                                RoutsGetByIdEvent(routeBloc.routes[index].id));
-
-                          },
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 2.w, vertical: 1.h),
-                            decoration: BoxDecoration(
-                              color: AppColors.myGrey,
-                              borderRadius: BorderRadius.circular(20),
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    padding: EdgeInsets.only(bottom: 1.h),
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {
+                          routeBloc.add(
+                              RoutsGetByIdEvent(routeBloc.routes[index].id));
+                          navigateTo(
+                            context,
+                            RoutesDetailsView(
+                              route:routeBloc.routes[index],
                             ),
-                            child: Row(
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 2.w, vertical: 1.h),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.red,
-                                  ),
-                                  child: TextWidget(
-                                    text: routeBloc.routes[index].id.toString(),
-                                    textColor: Colors.white,
-                                    fontSize: 10.sp,
-                                  ),
-                                ),
-                                const HorizontalSpacing(2),
-                                Expanded(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      TextWidget(
-                                        text:
-                                            "${routeBloc.routes[index].startName} - ${routeBloc.routes[index].endName}",
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
+                          );
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 2.w, vertical: 1.h),
+                          decoration: BoxDecoration(
+                            color: AppColors.myGrey,
+                            borderRadius: BorderRadius.circular(20),
                           ),
-                        );
-                      },
-                      separatorBuilder: (context, index) =>
-                          const VerticalSpacing(1.5),
-                      itemCount: routeBlocListener.routes.length)
+                          child: Row(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 2.w, vertical: 1.h),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.red,
+                                ),
+                                child: TextWidget(
+                                  text: routeBloc.routes[index].id.toString(),
+                                  textColor: Colors.white,
+                                  fontSize: 10.sp,
+                                ),
+                              ),
+                              const HorizontalSpacing(2),
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    TextWidget(
+                                      text:
+                                          "${routeBloc.routes[index].startName} - ${routeBloc.routes[index].endName}",
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const HorizontalSpacing(2),
+                              IconButton(
+                                  onPressed: () {
+                                    print('the dkdkdkkd ${routeBlocListener.routes[index].fav}');
+                                    if (routeBlocListener.routes[index].fav) {
+                                      routeBloc.add(
+                                          RoutesDeleteNewRouteToFavoritesEvent(
+                                              index,
+                                              routeBloc.routes[index].id));
+                                    } else {
+                                      routeBloc.add(
+                                          RoutesAddNewRouteToFavoritesEvent(
+                                              index,
+                                              routeBloc.routes[index].id));
+                                    }
+                                  },
+                                  icon: Icon(
+                                    routeBlocListener.routes[index].fav
+                                        ? Icons.favorite
+                                        : Icons.favorite_border,
+                                    color: Colors.red,
+                                  )),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                    separatorBuilder: (context, index) =>
+                        const VerticalSpacing(1.5),
+                    itemCount: routeBlocListener.routes.length,
+                  )
                 ],
               ),
             ),

@@ -15,8 +15,12 @@ abstract class AppURLs {
     return "${ApisUrl.baseURL}/api/route/favoriteRoutes";
   }
 
-  static String addNewFavRoute(int id) {
-    return "${ApisUrl.baseURL}/api/route/addFavoriteRoute/$id";
+  static String favoriteRoute(int id) {
+    return "${ApisUrl.baseURL}/api/route/FavoriteRoute/$id";
+  }
+
+  static String getBusLocation(int id) {
+    return "${ApisUrl.baseURL}/api/user/bus/$id/location";
   }
 
   static String userLogin = '/api/user/login';

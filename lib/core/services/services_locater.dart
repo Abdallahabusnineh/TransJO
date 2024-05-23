@@ -24,6 +24,10 @@ import 'package:transjo/domain/usecases/forgot_password/forgot_password_usecase.
 import 'package:transjo/domain/usecases/forgot_password/verification_usecase.dart';
 import 'package:transjo/domain/usecases/login_usecase.dart';
 import 'package:transjo/domain/usecases/register_usecase.dart';
+import 'package:transjo/domain/usecases/routes/add_route_to_fav.dart';
+import 'package:transjo/domain/usecases/routes/bus_location_usecase.dart';
+import 'package:transjo/domain/usecases/routes/delete_route_from_fav_usecase.dart';
+import 'package:transjo/domain/usecases/routes/get_all_fav_routes_usecase.dart';
 import 'package:transjo/domain/usecases/routes/get_all_routes_usecase.dart';
 import 'package:transjo/domain/usecases/routes/get_routes_by_id_usecase.dart';
 import 'package:transjo/domain/usecases/setting/change_password_updated_usecase.dart';
@@ -36,9 +40,7 @@ import 'package:transjo/presentation/blocs/Login/login_bloc.dart';
 import 'package:transjo/presentation/blocs/forgotpassword/forgot_password_bloc.dart';
 import 'package:transjo/presentation/blocs/forgotpassword/verification_bloc.dart';
 import 'package:transjo/presentation/blocs/register/register_bloc.dart';
-import 'package:transjo/presentation/blocs/setting/change_password_bloc/change_password_bloc.dart';
 import 'package:transjo/presentation/blocs/setting/feedback/feed_back_bloc.dart';
-import 'package:transjo/presentation/blocs/setting/logout/logout_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -61,51 +63,54 @@ class ServicesLocater {
     sl
       ..registerLazySingleton(() => GetAllRoutesUsecase(sl()))
       ..registerLazySingleton(() => GetRouteByIdUsecase(sl()))
+      ..registerLazySingleton(() => GetAllFavRoutesUsecase(sl()))
+      ..registerLazySingleton(() => AddRouteToFavUsecase(sl()))
+      ..registerLazySingleton(() => DeleteRouteFromFav(sl()))
+      ..registerLazySingleton(() => BusLocationUsecase(sl()))
       ..registerLazySingleton<BaseRoutsRepositories>(
           () => RoutesRepository(sl()))
       ..registerLazySingleton<BaseRoutesDatasource>(() => RoutesDatasource());
-
 
     //forgot password
     sl.registerFactory(() => ForgotPasswordBloc(sl()));
     sl.registerFactory(() => VerificationBloc(sl()));
     sl.registerLazySingleton(() => SendCodeUseCase(sl()));
     sl.registerLazySingleton(() => VerificationUseCase(sl()));
-    sl.registerLazySingleton<BaseForgotPasswordRepository>(() => ForgotPasswordRepository(
-        sl()));
-    sl.registerLazySingleton<BaseForgotPasswordDataSource>(() => ForgotPasswordDataSource());
+    sl.registerLazySingleton<BaseForgotPasswordRepository>(
+        () => ForgotPasswordRepository(sl()));
+    sl.registerLazySingleton<BaseForgotPasswordDataSource>(
+        () => ForgotPasswordDataSource());
 
     //change password
 
     sl.registerLazySingleton(() => ChangePasswordSendCodeUseCase(sl()));
     sl.registerLazySingleton(() => ChangePasswordVerificationCodeUseCase(sl()));
     sl.registerLazySingleton(() => ChangePasswordUpdatedUseCase(sl()));
-    sl.registerLazySingleton<ChangePasswordBaseRepository>(() => ChangePasswordRepository(
-        sl()));
-    sl.registerLazySingleton<ChangePasswordBaseDataSource>(() => ChangePasswordDataSource());
+    sl.registerLazySingleton<ChangePasswordBaseRepository>(
+        () => ChangePasswordRepository(sl()));
+    sl.registerLazySingleton<ChangePasswordBaseDataSource>(
+        () => ChangePasswordDataSource());
 
     //feed back
     sl.registerFactory(() => FeedBackBloc(sl()));
     sl.registerLazySingleton(() => FeedBackUseCase(sl()));
-    sl.registerLazySingleton<FeedBackBaseRepository>(() => FeedBackRepository(
-        sl()));
-    sl.registerLazySingleton<FeedBackBaseDataSource>(() => FeedBackDataSource());
+    sl.registerLazySingleton<FeedBackBaseRepository>(
+        () => FeedBackRepository(sl()));
+    sl.registerLazySingleton<FeedBackBaseDataSource>(
+        () => FeedBackDataSource());
 
     //logout
-   // sl.registerFactory(() => LogoutBloc(sl()));
+    // sl.registerFactory(() => LogoutBloc(sl()));
 
     sl.registerLazySingleton(() => LogOutUseCase(sl()));
-    sl.registerLazySingleton<LogOutBaseRepository>(() => LogOutRepository(
-        sl()));
+    sl.registerLazySingleton<LogOutBaseRepository>(
+        () => LogOutRepository(sl()));
     sl.registerLazySingleton<LogOutBaseDataSource>(() => LogOutDataSource());
     //==========================UserDetails=============================
-    sl.registerLazySingleton(()=>UserDetailsUseCase(sl()));
-    sl.registerLazySingleton<BaseUserDetailsRepository>(()=>UserDetailsRepository(sl()));
-    sl.registerLazySingleton<BaseUserDetailsDataSource>(()=>UserDetailsDataSource());
-
-
-
-
-
+    sl.registerLazySingleton(() => UserDetailsUseCase(sl()));
+    sl.registerLazySingleton<BaseUserDetailsRepository>(
+        () => UserDetailsRepository(sl()));
+    sl.registerLazySingleton<BaseUserDetailsDataSource>(
+        () => UserDetailsDataSource());
   }
 }

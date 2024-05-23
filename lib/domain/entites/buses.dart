@@ -4,8 +4,8 @@ class Buses extends Equatable {
   final int id;
   final String ownerName;
   final String routeNeme;
-  final int capacity;
-  final double price;
+  final num capacity;
+  final num price;
   final double lat;
   final double lng;
   final bool working;

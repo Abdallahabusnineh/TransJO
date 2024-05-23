@@ -65,4 +65,21 @@ class DioHelper {
     };
     return dio!.put(url, queryParameters: query, data: data);
   }
+
+
+  static Future<Response> deleteData({
+    required String url,
+    dynamic query,
+    Map<String, dynamic>? data,
+    String lang = 'en',
+    String? token,
+  }) async {
+    dio!.options.headers = {
+      'Content-Type': 'application/json',
+      'lang': lang,
+      if (token != null) 'Authorization': "Bearer $token"
+    };
+    var x = await dio!.delete(url, queryParameters: query, data: data);
+    return x;
+  }
 }

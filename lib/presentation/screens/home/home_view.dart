@@ -13,12 +13,7 @@ class HomeView extends StatelessWidget {
     return BlocListener<RoutsBloc, RoutsState>(
       listener: (context, state) {
         if (state is RoutsGetByIdSuccessState) {
-          navigateTo(
-            context,
-            RoutesDetailsView(
-              route: state.routs,
-            ),
-          );
+
         }
       },
       child: Scaffold(

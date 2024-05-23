@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:transjo/core/utils/tools.dart';
+import 'package:transjo/presentation/blocs/routs/routs_bloc.dart';
 
 class FavoriteRoutesContent extends StatelessWidget {
   const FavoriteRoutesContent({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
+    var bloc = context.read<RoutsBloc>();
+    print('the route of  ${bloc.favoriteRoutes}');
     return ListView.separated(
       // shrinkWrap: true,
+        padding: EdgeInsets.symmetric(horizontal: 4.w,vertical: 7.h),
         itemBuilder: (context, index) {
           return ListTile(
             leading: CircleAvatar(
@@ -16,12 +20,12 @@ class FavoriteRoutesContent extends StatelessWidget {
               backgroundColor: Colors.white,
             ),
             title: Text(
-              'Zarqa complex to Hashemite university',
+              "${bloc.favoriteRoutes[index].startName} - ${bloc.favoriteRoutes[index].endName}",
               style: TextStyle(
                   fontFamily: 'Montserrat', fontWeight: FontWeight.bold),
             ),
             subtitle: Text(
-              'Description',
+              bloc.favoriteRoutes[index].fare.toString(),
               style: TextStyle(color: Colors.grey),
             ),
             trailing: IconButton(
@@ -44,6 +48,6 @@ class FavoriteRoutesContent extends StatelessWidget {
             color: Colors.grey,
           );
         },
-        itemCount: 25);
+        itemCount: bloc.favoriteRoutes.length);
   }
 }

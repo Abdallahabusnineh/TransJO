@@ -26,6 +26,9 @@ class _RouteDetailsMapState extends State<RouteDetailsMap> {
 
   static LatLng _pGooglePlex = LatLng(0, 0);
   static LatLng _applePark = LatLng(0, 0);
+
+  static LatLng _interSection1 = LatLng(0, 0);
+  static LatLng _interSection2 = LatLng(0, 0);
   LatLng? _currentP;
 
   Map<PolylineId, Polyline> polylines = {};
@@ -36,6 +39,11 @@ class _RouteDetailsMapState extends State<RouteDetailsMap> {
         widget.route.stopPoints.first.lat, widget.route.stopPoints.first.lng);
     _applePark = LatLng(
         widget.route.stopPoints.last.lat, widget.route.stopPoints.last.lng);
+
+    _interSection1 =
+        LatLng(widget.route.stopPoints[3].lat, widget.route.stopPoints[3].lng);
+    _interSection2 =
+        LatLng(widget.route.stopPoints[2].lat, widget.route.stopPoints[2].lng);
     getLocationUpdates().then((_) => (
           getPolyLinePoints().then((polylineCoordinates) =>
               (generatePolyLineFromPoints(polylineCoordinates))),
@@ -75,11 +83,16 @@ class _RouteDetailsMapState extends State<RouteDetailsMap> {
                 icon: BitmapDescriptor.defaultMarker,
                 position: _applePark,
               ),
-              // Marker(
-              //   markerId: MarkerId("carlos"),
-              //   position: LatLng(bloc.currentPosition!.latitude,
-              //       bloc.currentPosition!.longitude),
-              // ),
+              Marker(
+                markerId: MarkerId("carlos"),
+                position:
+                    LatLng(_interSection1.latitude, _interSection1.longitude),
+              ),
+              Marker(
+                markerId: MarkerId("ddd"),
+                position:
+                    LatLng(_interSection2.latitude, _interSection2.longitude),
+              ),
             },
             compassEnabled: true,
             myLocationButtonEnabled: true,
@@ -144,7 +157,9 @@ class _RouteDetailsMapState extends State<RouteDetailsMap> {
         PointLatLng(_applePark.latitude, _applePark.longitude),
         travelMode: TravelMode.driving);
     if (result.points.isNotEmpty) {
+      print('the Posdd ${result.points}');
       result.points.forEach((PointLatLng point) {
+        print('dkdkdkkd ${point}');
         polylineCoordinates.add(LatLng(point.latitude, point.longitude));
       });
     } else {

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "367054933236",
+    "project_id": "transjo-61603",
+    "storage_bucket": "transjo-61603.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:367054933236:android:8f56b7ca36c44c7edb22a1",
+        "android_client_info": {
+          "package_name": "TransJo.com.transjo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQEkwyxCKj_OqfPR0kOqyr0KFYJ0Xb9f8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
